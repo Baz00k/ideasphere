@@ -33,13 +33,13 @@
     "superjson": "1.9.1"
   },
   "devDependencies": {
-    "@ideasphere/api": "^0.1.0",
-    "@ideasphere/eslint-config": "^0.1.0",
-    "@ideasphere/tailwind-config": "^0.1.0",
     "@babel/core": "^7.21.8",
     "@babel/preset-env": "^7.21.5",
     "@babel/runtime": "^7.21.5",
     "@expo/config-plugins": "^6.0.2",
+    "@ideasphere/api": "^0.1.0",
+    "@ideasphere/eslint-config": "^0.1.0",
+    "@ideasphere/tailwind-config": "^0.1.0",
     "@types/babel__core": "^7.20.0",
     "@types/react": "^18.2.14",
     "@types/webpack-env": "^1.18.0",

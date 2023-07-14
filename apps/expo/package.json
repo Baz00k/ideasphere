@@ -40,7 +40,7 @@
     "@ideasphere/api": "^0.1.0",
     "@ideasphere/eslint-config": "^0.1.0",
     "@ideasphere/tailwind-config": "^0.1.0",
-    "@types/babel__core": "^7.20.0",
+    "@types/babel__core": "^7.20.1",
     "@types/react": "^18.2.14",
     "@types/webpack-env": "^1.18.0",
     "babel-plugin-module-resolver": "^5.0.0",

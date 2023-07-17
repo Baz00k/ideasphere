@@ -1,6 +1,6 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:base"],
+  "extends": ["config:recommended"],
   "packageRules": [
     {
       "matchPackagePatterns": ["^@ideasphere/"],
@@ -9,5 +9,11 @@
   ],
   "updateInternalDeps": true,
   "rangeStrategy": "bump",
-  "automerge": true
+  "automerge": true,
+  "labels": ["automated"],
+  "schedule": [
+    "after 10pm every weekday",
+    "before 5am every weekday",
+    "every weekend"
+  ]
 }

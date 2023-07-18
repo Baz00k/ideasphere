@@ -35,7 +35,7 @@ const defineConfig = (): ExpoConfig => ({
       projectId: "343d47b1-d06f-4fbf-81a3-ce1c430e0f6b",
     },
   },
-  plugins: ["./expo-plugins/with-modify-gradle.js"],
+  plugins: ["expo-router", "./expo-plugins/with-modify-gradle.js"],
 });
 
 export default defineConfig;

@@ -1,65 +1,60 @@
-import React from "react";
-import { Image, Pressable, Text, View } from "react-native";
+import React, { useState } from "react";
+import { Image, Pressable } from "react-native";
+import { PanGestureHandler } from "react-native-gesture-handler";
+import Animated, {
+  FadeIn,
+  FadeOut,
+  Layout,
+  SlideInDown,
+  SlideOutDown,
+} from "react-native-reanimated";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { Input } from "~/components/input";
+import { Button, Login } from "~/components";
 import Logo from "../../assets/ideasphere_logo.png";
 
 const Index = () => {
+  const [cardShown, setCardShown] = useState(false);
+
   return (
-    <SafeAreaView className="flex h-full flex-col items-center bg-white">
-      <Image
-        source={Logo}
-        alt="IdeaSphere Logo"
-        className="mx-auto mb-12 mt-10"
-      />
-      <View className="flex w-full flex-grow flex-col items-center justify-center rounded-t-3xl bg-primary p-4 ">
-        <Text className="mx-auto mb-12 mt-auto text-4xl text-secondary">
-          Zaloguj się
-        </Text>
-        <View className="flex w-10/12 flex-col gap-y-8">
-          <Input
-            placeholder="E-mail"
-            textContentType="emailAddress"
-            keyboardType="email-address"
+    <SafeAreaView className="flex h-full flex-col items-center justify-center bg-white">
+      <Animated.View className="w-full" layout={Layout.damping(0.5)}>
+        <Pressable onPress={() => cardShown && setCardShown(false)}>
+          <Image
+            source={Logo}
+            alt="IdeaSphere Logo"
+            className="mx-auto my-10"
           />
-          <Input
-            placeholder="Hasło"
-            textContentType="password"
-            secureTextEntry
-          />
-          <View>
-            <Text className="mx-auto mb-4 text-sm text-gray-500">
-              Lub kontynuuj z:
-            </Text>
-            <View className="flex flex-row justify-center gap-2">
-              <View className="flex w-1/6 flex-row items-center justify-center rounded-lg bg-[#DB4437]">
-                <Text className="p-2 text-sm text-white">G</Text>
-              </View>
-              <View className="flex w-1/6 flex-row items-center justify-center rounded-lg bg-[#3B5998]">
-                <Text className="p-2 text-sm text-white">F</Text>
-              </View>
-              <View className="flex w-1/6 flex-row items-center justify-center rounded-lg bg-[#303030]">
-                <Text className="p-2 text-sm text-white">A</Text>
-              </View>
-            </View>
-          </View>
-          <Pressable
-            className="self-center rounded-full border border-secondary p-4"
-            onPress={() => {
-              console.log("Login");
-            }}
+          {!cardShown && (
+            <Animated.View entering={FadeIn} exiting={FadeOut}>
+              <Button
+                onPress={() => setCardShown(true)}
+                text="Zaczynamy!"
+                className="mx-auto min-w-[50%]"
+              />
+            </Animated.View>
+          )}
+        </Pressable>
+      </Animated.View>
+      {cardShown && (
+        <PanGestureHandler
+          // Swipe down to close
+          onGestureEvent={({ nativeEvent }) => {
+            if (nativeEvent.translationY > 100) {
+              setCardShown(false);
+            }
+          }}
+          maxPointers={1}
+        >
+          <Animated.View
+            className="flex w-full flex-grow flex-col items-center justify-center overflow-hidden rounded-t-3xl bg-primary px-4 py-8"
+            entering={SlideInDown.delay(150)}
+            exiting={SlideOutDown}
           >
-            <Text className="text-md text-secondary">Zaloguj się</Text>
-          </Pressable>
-        </View>
-        <View className="mb-4 mt-auto flex flex-row justify-center">
-          <Text className="text-md text-gray-800">
-            Nie masz jeszcze konta?{" "}
-            <Text className="text-md text-secondary">Zarejestruj się</Text>
-          </Text>
-        </View>
-      </View>
+            <Login />
+          </Animated.View>
+        </PanGestureHandler>
+      )}
     </SafeAreaView>
   );
 };

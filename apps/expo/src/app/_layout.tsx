@@ -20,7 +20,7 @@ const RootLayout = () => {
             headerShown: false,
           }}
         />
-        <StatusBar />
+        <StatusBar style="dark" />
       </SafeAreaProvider>
     </TRPCProvider>
   );

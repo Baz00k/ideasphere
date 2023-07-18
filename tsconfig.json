@@ -17,7 +17,8 @@
     "incremental": true,
     "noUncheckedIndexedAccess": true,
     "noImplicitAny": true,
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "allowImportingTsExtensions": true
   },
   "include": [".eslintrc.js", "prettier.config.cjs"]
 }

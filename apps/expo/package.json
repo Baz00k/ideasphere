@@ -2,27 +2,36 @@
   "name": "@ideasphere/expo",
   "version": "0.1.0",
   "main": "index.tsx",
+  "private": true,
   "scripts": {
     "clean": "git clean -xdf .expo .turbo node_modules",
-    "dev": "expo start",
-    "dev:android": "expo start --android",
-    "dev:ios": "expo start --ios",
+    "dev": "pnpm with-env expo start",
+    "dev:android": "pnpm with-env expo start --android",
+    "dev:ios": "pnpm with-env expo start --ios",
     "lint": "eslint .",
     "lint:fix": "pnpm lint --fix",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "with-env": "dotenv -e ../../.env --"
   },
   "dependencies": {
     "@expo/metro-config": "^0.10.6",
     "@expo/vector-icons": "^13.0.0",
+    "@react-navigation/drawer": "^6.6.3",
     "@shopify/flash-list": "1.4.3",
+    "@supabase/auth-helpers-react": "^0.4.1",
+    "@supabase/supabase-js": "^2.26.0",
     "@tanstack/react-query": "^4.29.25",
     "@trpc/client": "^10.34.0",
     "@trpc/react-query": "^10.34.0",
     "@trpc/server": "^10.34.0",
     "expo": "^49.0.3",
+    "expo-apple-authentication": "~6.1.0",
     "expo-constants": "~14.4.2",
+    "expo-crypto": "^12.4.1",
+    "expo-image": "^1.3.2",
     "expo-linking": "~5.0.2",
     "expo-router": "^2.0.0",
+    "expo-secure-store": "~12.3.1",
     "expo-splash-screen": "~0.20.4",
     "expo-status-bar": "~1.6.0",
     "nativewind": "^2.0.11",
@@ -33,6 +42,7 @@
     "react-native-reanimated": "~3.3.0",
     "react-native-safe-area-context": "4.6.3",
     "react-native-screens": "~3.22.1",
+    "react-native-url-polyfill": "^2.0.0",
     "superjson": "1.13.1"
   },
   "devDependencies": {
@@ -41,15 +51,21 @@
     "@babel/runtime": "^7.22.6",
     "@expo/config-plugins": "^7.2.5",
     "@ideasphere/api": "^0.1.0",
-    "@ideasphere/eslint-config": "^0.1.0",
+    "@ideasphere/eslint-config": "^0.2.0",
     "@ideasphere/tailwind-config": "^0.1.0",
     "@types/babel__core": "^7.20.1",
     "@types/react": "^18.2.15",
-    "@types/webpack-env": "^1.18.0",
+    "dotenv-cli": "^7.2.1",
     "eslint": "^8.45.0",
     "postcss": "^8.4.24",
     "tailwindcss": "^3.3.2",
     "typescript": "^5.1.6"
   },
-  "private": true
+  "eslintConfig": {
+    "root": true,
+    "extends": [
+      "@ideasphere/eslint-config/base",
+      "@ideasphere/eslint-config/react"
+    ]
+  }
 }

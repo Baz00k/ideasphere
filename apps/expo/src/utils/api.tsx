@@ -1,17 +1,18 @@
-import React from "react";
-import Constants from "expo-constants";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { httpBatchLink } from "@trpc/client";
-import { createTRPCReact } from "@trpc/react-query";
-import superjson from "superjson";
+import { useState } from "react"
+import Constants from "expo-constants"
+import { useSupabaseClient } from "@supabase/auth-helpers-react"
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
+import { httpBatchLink } from "@trpc/client"
+import { createTRPCReact } from "@trpc/react-query"
+import superjson from "superjson"
 
-import { type AppRouter } from "@ideasphere/api";
+import type { AppRouter } from "@ideasphere/api"
 
 /**
  * A set of typesafe hooks for consuming your API.
  */
-export const api = createTRPCReact<AppRouter>();
-export { type RouterInputs, type RouterOutputs } from "@ideasphere/api";
+export const api = createTRPCReact<AppRouter>()
+export { type RouterInputs, type RouterOutputs } from "@ideasphere/api"
 
 /**
  * Extend this function when going to production by
@@ -26,18 +27,15 @@ const getBaseUrl = () => {
    * **NOTE**: This is only for development. In production, you'll want to set the
    * baseUrl to your production API URL.
    */
-  const debuggerHost =
-    Constants.expoConfig?.hostUri ??
-    Constants.manifest2?.extra?.expoGo?.debuggerHost;
-  const localhost = debuggerHost?.split(":")[0];
+  const debuggerHost = Constants.expoConfig?.hostUri
+
+  const localhost = debuggerHost?.split(":")[0]
   if (!localhost) {
     // return "https://your-production-url.com";
-    throw new Error(
-      "Failed to get localhost. Please point to your production server.",
-    );
+    throw new Error("Failed to get localhost. Please point to your production server.")
   }
-  return `http://${localhost}:3000`;
-};
+  return `http://${localhost}:3000`
+}
 
 /**
  * A wrapper for your app that provides the TRPC context.
@@ -45,23 +43,28 @@ const getBaseUrl = () => {
  */
 
 export function TRPCProvider(props: { children: React.ReactNode }) {
-  const [queryClient] = React.useState(() => new QueryClient());
-  const [trpcClient] = React.useState(() =>
+  const supabase = useSupabaseClient()
+
+  const [queryClient] = useState(() => new QueryClient())
+  const [trpcClient] = useState(() =>
     api.createClient({
       transformer: superjson,
       links: [
         httpBatchLink({
           url: `${getBaseUrl()}/api/trpc`,
+          headers: async () => {
+            const { data } = await supabase.auth.getSession()
+            const token = data.session?.access_token
+            return { Authorization: token }
+          },
         }),
       ],
     }),
-  );
+  )
 
   return (
     <api.Provider client={trpcClient} queryClient={queryClient}>
-      <QueryClientProvider client={queryClient}>
-        {props.children}
-      </QueryClientProvider>
+      <QueryClientProvider client={queryClient}>{props.children}</QueryClientProvider>
     </api.Provider>
-  );
+  )
 }

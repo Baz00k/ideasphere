@@ -1,4 +1,11 @@
-import type { ExpoConfig } from "@expo/config";
+import type { ExpoConfig } from "@expo/config"
+
+const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL
+const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+
+if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
+  throw new Error("Missing NEXT_PUBLIC_SUPABASE_URL or NEXT_PUBLIC_SUPABASE_ANON_KEY")
+}
 
 const defineConfig = (): ExpoConfig => ({
   name: "IdeaSphere",
@@ -9,7 +16,7 @@ const defineConfig = (): ExpoConfig => ({
   orientation: "portrait",
   //TODO: Change to square icon
   icon: "./assets/ideasphere_logo.png",
-  userInterfaceStyle: "automatic",
+  userInterfaceStyle: "light",
   splash: {
     image: "./assets/ideasphere_logo.png",
     resizeMode: "contain",
@@ -29,16 +36,19 @@ const defineConfig = (): ExpoConfig => ({
       foregroundImage: "./assets/ideasphere_logo.png",
       backgroundColor: "#FFFFFF",
     },
+    softwareKeyboardLayoutMode: "resize",
   },
   extra: {
     eas: {
       projectId: "343d47b1-d06f-4fbf-81a3-ce1c430e0f6b",
     },
+    SUPABASE_URL,
+    SUPABASE_ANON_KEY,
   },
-  plugins: ["expo-router", "./expo-plugins/with-modify-gradle.js"],
+  plugins: ["expo-router", "./expo-plugins/with-modify-gradle.js", "expo-apple-authentication"],
   experiments: {
-    tsconfigPaths: true
-  }
-});
+    tsconfigPaths: true,
+  },
+})
 
-export default defineConfig;
+export default defineConfig

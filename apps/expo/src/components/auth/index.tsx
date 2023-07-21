@@ -1,1 +1,1 @@
-export * from "./login.tsx";
+export * from "./routeProtector"

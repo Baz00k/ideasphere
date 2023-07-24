@@ -1,5 +1,5 @@
-import Link from "next/link";
-import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
+import Link from "next/link"
+import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react"
 
 export default function HomePage() {
   return (
@@ -11,12 +11,12 @@ export default function HomePage() {
         <AuthShowcase />
       </div>
     </main>
-  );
+  )
 }
 
 function AuthShowcase() {
-  const supabase = useSupabaseClient();
-  const user = useUser();
+  const supabase = useSupabaseClient()
+  const user = useUser()
 
   if (!user) {
     return (
@@ -26,7 +26,7 @@ function AuthShowcase() {
       >
         Sign In
       </Link>
-    );
+    )
   }
 
   return (
@@ -41,5 +41,5 @@ function AuthShowcase() {
         Sign Out
       </button>
     </>
-  );
+  )
 }

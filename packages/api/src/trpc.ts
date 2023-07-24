@@ -6,16 +6,13 @@
  * tl;dr - this is where all the tRPC server stuff is created and plugged in.
  * The pieces you will need to use are documented accordingly near the end
  */
-import {
-  createPagesServerClient,
-  type User,
-} from "@supabase/auth-helpers-nextjs";
-import { initTRPC, TRPCError } from "@trpc/server";
-import type { CreateNextContextOptions } from "@trpc/server/adapters/next";
-import superjson from "superjson";
-import { ZodError } from "zod";
+import { createPagesServerClient, type User } from "@supabase/auth-helpers-nextjs"
+import { initTRPC, TRPCError } from "@trpc/server"
+import type { CreateNextContextOptions } from "@trpc/server/adapters/next"
+import superjson from "superjson"
+import { ZodError } from "zod"
 
-import { prisma } from "@ideasphere/db";
+import { prisma } from "@ideasphere/db"
 
 /**
  * 1. CONTEXT
@@ -27,7 +24,7 @@ import { prisma } from "@ideasphere/db";
  *
  */
 interface CreateContextOptions {
-  user: User | null;
+  user: User | null
 }
 
 /**
@@ -43,8 +40,8 @@ export const createInnerTRPCContext = (opts: CreateContextOptions) => {
   return {
     user: opts.user,
     prisma,
-  };
-};
+  }
+}
 
 /**
  * This is the actual context you'll use in your router. It will be used to
@@ -52,20 +49,18 @@ export const createInnerTRPCContext = (opts: CreateContextOptions) => {
  * @link https://trpc.io/docs/context
  */
 export const createTRPCContext = async (opts: CreateNextContextOptions) => {
-  const supabase = createPagesServerClient({ req: opts.req, res: opts.res });
+  const supabase = createPagesServerClient({ req: opts.req, res: opts.res })
 
   // React Native will pass their token through headers,
   // browsers will have the session cookie set
-  const token = opts.req.headers.authorization;
+  const token = opts.req.headers.authorization
 
-  const user = token
-    ? await supabase.auth.getUser(token)
-    : await supabase.auth.getUser();
+  const user = token ? await supabase.auth.getUser(token) : await supabase.auth.getUser()
 
   return createInnerTRPCContext({
     user: user.data.user,
-  });
-};
+  })
+}
 
 /**
  * 2. INITIALIZATION
@@ -80,12 +75,11 @@ const t = initTRPC.context<typeof createTRPCContext>().create({
       ...shape,
       data: {
         ...shape.data,
-        zodError:
-          error.cause instanceof ZodError ? error.cause.flatten() : null,
+        zodError: error.cause instanceof ZodError ? error.cause.flatten() : null,
       },
-    };
+    }
   },
-});
+})
 
 /**
  * 3. ROUTER & PROCEDURE (THE IMPORTANT BIT)
@@ -98,7 +92,7 @@ const t = initTRPC.context<typeof createTRPCContext>().create({
  * This is how you create new routers and subrouters in your tRPC API
  * @see https://trpc.io/docs/router
  */
-export const createTRPCRouter = t.router;
+export const createTRPCRouter = t.router
 
 /**
  * Public (unauthed) procedure
@@ -107,7 +101,7 @@ export const createTRPCRouter = t.router;
  * tRPC API. It does not guarantee that a user querying is authorized, but you
  * can still access user session data if they are logged in
  */
-export const publicProcedure = t.procedure;
+export const publicProcedure = t.procedure
 
 /**
  * Reusable middleware that enforces users are logged in before running the
@@ -115,15 +109,15 @@ export const publicProcedure = t.procedure;
  */
 const enforceUserIsAuthed = t.middleware(({ ctx, next }) => {
   if (!ctx.user?.id) {
-    throw new TRPCError({ code: "UNAUTHORIZED" });
+    throw new TRPCError({ code: "UNAUTHORIZED" })
   }
   return next({
     ctx: {
       // infers the `user` as non-nullable
       user: ctx.user,
     },
-  });
-});
+  })
+})
 
 /**
  * Protected (authed) procedure
@@ -134,4 +128,4 @@ const enforceUserIsAuthed = t.middleware(({ ctx, next }) => {
  *
  * @see https://trpc.io/docs/procedures
  */
-export const protectedProcedure = t.procedure.use(enforceUserIsAuthed);
+export const protectedProcedure = t.procedure.use(enforceUserIsAuthed)

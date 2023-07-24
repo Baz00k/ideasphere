@@ -4,10 +4,7 @@
 
 /** @type { PrettierConfig | SortImportsConfig | TailwindConfig } */
 const config = {
-  plugins: [
-    "@ianvs/prettier-plugin-sort-imports",
-    "prettier-plugin-tailwindcss",
-  ],
+  plugins: ["@ianvs/prettier-plugin-sort-imports", "prettier-plugin-tailwindcss"],
   tailwindConfig: "./packages/config/tailwind",
   importOrder: [
     "^(react/(.*)$)|^(react$)|^(react-native(.*)$)",
@@ -27,6 +24,6 @@ const config = {
   importOrderTypeScriptVersion: "5.0.4",
   printWidth: 100,
   semi: false,
-};
+}
 
-module.exports = config;
+module.exports = config

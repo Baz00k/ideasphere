@@ -1,5 +1,5 @@
 // Importing env files here to validate on build
-import "./src/env.mjs";
+import "./src/env.mjs"
 
 /** @type {import("next").NextConfig} */
 const config = {
@@ -14,6 +14,6 @@ const config = {
   images: {
     domains: ["avatars.githubusercontent.com"],
   },
-};
+}
 
-export default config;
+export default config

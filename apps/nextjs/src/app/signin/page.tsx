@@ -1,16 +1,16 @@
-"use client";
+"use client"
 
-import { useState } from "react";
-import { useSupabaseClient } from "@supabase/auth-helpers-react";
-import { Eye, EyeOff, Github } from "lucide-react";
+import { useState } from "react"
+import { useSupabaseClient } from "@supabase/auth-helpers-react"
+import { Eye, EyeOff, Github } from "lucide-react"
 
 export default function SigninPage() {
-  const supabase = useSupabaseClient();
+  const supabase = useSupabaseClient()
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
-  const [isSignUp, setIsSignUp] = useState(false);
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [showPassword, setShowPassword] = useState(false)
+  const [isSignUp, setIsSignUp] = useState(false)
 
   const signInWithPassword = async () => {
     const { error, data } = isSignUp
@@ -21,21 +21,21 @@ export default function SigninPage() {
       : await supabase.auth.signInWithPassword({
           email,
           password,
-        });
-    if (error) alert(error.message);
+        })
+    if (error) alert(error.message)
     else if (isSignUp && data.user) {
-      alert("Check your email for a confirmation link.");
-      setIsSignUp(false);
+      alert("Check your email for a confirmation link.")
+      setIsSignUp(false)
     }
-  };
+  }
 
   const signInWithGithub = async () => {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "github",
       options: { scopes: "read:user user:email" },
-    });
-    if (error) alert(error.message);
-  };
+    })
+    if (error) alert(error.message)
+  }
 
   return (
     <main className="flex h-screen bg-zinc-900 text-zinc-200">
@@ -88,5 +88,5 @@ export default function SigninPage() {
         </button>
       </div>
     </main>
-  );
+  )
 }

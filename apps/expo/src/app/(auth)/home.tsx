@@ -4,7 +4,6 @@ import { SafeAreaView } from "react-native-safe-area-context"
 const Home: React.FC = () => {
   return (
     <SafeAreaView className="h-full w-full bg-white p-2">
-      <Text className="mb-4 text-center text-3xl font-medium text-secondary">Home screen</Text>
       <View className=" flex w-full flex-row flex-wrap">
         <View className="aspect-square w-1/2 p-2">
           <View className="h-full w-full rounded-3xl bg-primary"></View>

@@ -16,7 +16,6 @@
   "dependencies": {
     "@expo/metro-config": "^0.10.6",
     "@expo/vector-icons": "^13.0.0",
-    "@react-navigation/drawer": "^6.6.3",
     "@shopify/flash-list": "1.4.3",
     "@supabase/auth-helpers-react": "^0.4.1",
     "@supabase/supabase-js": "^2.26.0",

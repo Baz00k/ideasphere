@@ -26,7 +26,16 @@ const LogInLayout = () => {
               onPress={() => cardShown && setCardShown(false)}
               className="flex w-full items-center"
             >
-              <Image source={Logo} alt="IdeaSphere Logo" className="my-10" />
+              <Image
+                source={Logo}
+                alt="IdeaSphere Logo"
+                className="my-10"
+                style={{
+                  width: 200,
+                  height: 55,
+                  resizeMode: "contain",
+                }}
+              />
               {!cardShown && (
                 <Animated.View entering={FadeIn} exiting={FadeOut} className="w-2/3">
                   <Button onPress={() => setCardShown(true)} text="Zaczynamy!" />

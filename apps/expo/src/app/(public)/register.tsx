@@ -8,6 +8,7 @@ import { signInWithApple, signUpWithEmailAndPass } from "~/utils/auth"
 import { Button, Input } from "~/components/base"
 
 const Register: React.FC = () => {
+  const [username, setUsername] = useState<string>("")
   const [email, setEmail] = useState<string>("")
   const [password, setPassword] = useState<string>("")
 
@@ -27,12 +28,17 @@ const Register: React.FC = () => {
   const handleLogin = async () => {
     setLoading(true)
     try {
-      const { error } = await signUpWithEmailAndPass(email, password)
+      const { error } = await signUpWithEmailAndPass(email, password, username)
 
       if (error) {
         Alert.alert(error.message)
         return
       }
+
+      Alert.alert(
+        "Rejestracja zakończona sukcesem!",
+        "Sprawdź swoją skrzynkę pocztową, aby zweryfikować konto.",
+      )
     } catch (error) {
       console.error(error)
     } finally {
@@ -44,6 +50,13 @@ const Register: React.FC = () => {
     <>
       <Text className="mx-auto mb-12 mt-auto text-4xl text-secondary">Rejestracja</Text>
       <View className="flex w-10/12 flex-col gap-y-8">
+        <Input
+          value={username}
+          onChangeText={(text) => setUsername(text)}
+          placeholder="Nazwa użytkownika"
+          textContentType="username"
+          autoCapitalize="none"
+        />
         <Input
           value={email}
           onChangeText={(text) => setEmail(text)}

@@ -61,13 +61,19 @@ const useProtectedRoutes = () => {
     const inAuthGroup = segments[0] === "(auth)"
     const inPublicGroup = segments[0] === "(public)"
 
+    const inNavigationRoot = !inAuthGroup && !inPublicGroup
+
     // If the user is not logged in and they are trying to access an auth route
     if (!user && (inAuthGroup || !inPublicGroup)) {
       // Redirect them to the auth screen
       router.replace("/logIn")
-    } else if (user && !inAuthGroup) {
+    } else if (user && inNavigationRoot) {
       // User already logged in, redirect them to auth home
       router.replace("/home")
+      // console log current route
+    } else if (!user && inNavigationRoot) {
+      // User not logged in, redirect them to auth screen
+      router.replace("/logIn")
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps

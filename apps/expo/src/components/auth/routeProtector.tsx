@@ -7,6 +7,8 @@ interface RouteProtectorProps {
   children: ReactNode
 }
 
+SplashScreen.preventAutoHideAsync()
+
 /**
  * This component is used to protect routes that require authentication.
  * It will render the children only when the navigation is ready.
@@ -17,8 +19,6 @@ interface RouteProtectorProps {
  */
 const RouteProtector: FC<RouteProtectorProps> = ({ children }) => {
   const navigationReady = useProtectedRoutes()
-
-  SplashScreen.preventAutoHideAsync()
 
   useEffect(() => {
     if (navigationReady) {

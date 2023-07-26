@@ -14,13 +14,12 @@ const defineConfig = (): ExpoConfig => ({
   scheme: "is",
   version: "1.0.0",
   orientation: "portrait",
-  //TODO: Change to square icon
-  icon: "./assets/ideasphere_logo.png",
+  icon: "./assets/ideasphere_icon.png",
   userInterfaceStyle: "light",
   splash: {
-    image: "./assets/ideasphere_logo.png",
-    resizeMode: "contain",
+    image: "./assets/ideasphere_splash.png",
     backgroundColor: "#FFFFFF",
+    resizeMode: "contain",
   },
   updates: {
     fallbackToCacheTimeout: 0,
@@ -29,11 +28,11 @@ const defineConfig = (): ExpoConfig => ({
   ios: {
     supportsTablet: true,
     bundleIdentifier: "your.bundle.identifier",
+    icon: "./assets/ideasphere_icon.png",
   },
   android: {
     adaptiveIcon: {
-      //TODO: Change to square icon
-      foregroundImage: "./assets/ideasphere_logo.png",
+      foregroundImage: "./assets/ideasphere_icon.png",
       backgroundColor: "#FFFFFF",
     },
     softwareKeyboardLayoutMode: "resize",

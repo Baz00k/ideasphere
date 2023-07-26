@@ -12,19 +12,19 @@ const fontSans = Inter({
 })
 
 export const metadata: Metadata = {
-  title: "Create T3 Turbo",
-  description: "Simple monorepo with shared backend for web & mobile apps",
+  title: "IdeaSphere",
+  description: "No idea what to do with your free time? Try IdeaSphere!",
   openGraph: {
-    title: "Create T3 Turbo",
-    description: "Simple monorepo with shared backend for web & mobile apps",
-    url: "https://create-t3-turbo.vercel.app",
-    siteName: "Create T3 Turbo",
+    title: "IdeaSphere",
+    description: "No idea what to do with your free time? Try IdeaSphere!",
+    url: "ideasphere.app",
+    siteName: "IdeaSphere",
   },
 }
 
 export default function Layout(props: { children: React.ReactNode; initialSession: Session }) {
   return (
-    <html lang="en">
+    <html lang="pl">
       <body className={["font-sans", fontSans.variable].join(" ")}>
         <AppProviders initialSession={props.initialSession}>{props.children}</AppProviders>
       </body>

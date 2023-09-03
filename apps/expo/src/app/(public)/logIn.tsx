@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react"
 import { Alert, Text, View } from "react-native"
 import * as AppleAuth from "expo-apple-authentication"
-import { Link } from "expo-router"
+import { Link, useRouter } from "expo-router"
 import Icon from "@expo/vector-icons/FontAwesome"
 
 import { signInWithApple, signInWithEmailAndPass } from "~/utils/auth"
 import { Button, Input } from "~/components/base"
 
 const Login: React.FC = () => {
+  const router = useRouter()
+
   const [email, setEmail] = useState<string>("")
   const [password, setPassword] = useState<string>("")
 
@@ -30,9 +32,18 @@ const Login: React.FC = () => {
       const { error } = await signInWithEmailAndPass(email, password)
 
       if (error) {
-        Alert.alert(error.message)
+        if (error.status === 400) {
+          Alert.alert("Błąd", "Niepoprawny email lub hasło")
+        } else if (error.status === 500) {
+          Alert.alert("Błąd", "Wystąpił błąd serwera")
+        } else {
+          Alert.alert("Błąd", "Wystąpił nieznany błąd")
+        }
+
         return
       }
+
+      router.push("/home")
     } catch (error) {
       console.error(error)
     } finally {
@@ -60,26 +71,28 @@ const Login: React.FC = () => {
           secureTextEntry
           autoCapitalize="none"
         />
-        <View>
-          <Text className="mx-auto mb-4 text-sm text-gray-500">Lub kontynuuj z:</Text>
-          <View className="flex h-10 flex-row justify-center gap-2">
-            <View className="flex w-1/6 flex-row items-center justify-center rounded-lg bg-[#DB4437]">
-              <Icon name="google" size={20} color="white" />
+        {false && ( // TODO: Uncomment when social auth is implemented
+          <View className="mx-auto flex w-52 flex-col gap-y-4">
+            <Text className="text-center text-sm text-gray-500">Lub kontynuuj z:</Text>
+            <View className="flex w-full flex-row items-center justify-center gap-x-2">
+              <View className="flex flex-row items-center justify-center rounded-lg bg-[#DB4437] px-6 py-1">
+                <Icon name="google" size={20} color="white" />
+              </View>
+              <View className="flex flex-row items-center justify-center rounded-lg bg-[#3B5998] px-6 py-1">
+                <Icon name="facebook" size={20} color="white" />
+              </View>
             </View>
-            <View className="flex w-1/6 flex-row items-center justify-center rounded-lg bg-[#3B5998]">
-              <Icon name="facebook" size={20} color="white" />
-            </View>
+            {isAppleSignInAvailable && (
+              <AppleAuth.AppleAuthenticationButton
+                buttonType={AppleAuth.AppleAuthenticationButtonType.SIGN_IN}
+                buttonStyle={AppleAuth.AppleAuthenticationButtonStyle.BLACK}
+                className="mx-auto h-14 w-1/2"
+                cornerRadius={8}
+                onPress={signInWithApple}
+              />
+            )}
           </View>
-          {isAppleSignInAvailable && (
-            <AppleAuth.AppleAuthenticationButton
-              buttonType={AppleAuth.AppleAuthenticationButtonType.SIGN_IN}
-              buttonStyle={AppleAuth.AppleAuthenticationButtonStyle.BLACK}
-              className="mx-auto h-14 w-1/2"
-              cornerRadius={8}
-              onPress={signInWithApple}
-            />
-          )}
-        </View>
+        )}
         <Button
           className="self-center"
           onPress={handleLogin}

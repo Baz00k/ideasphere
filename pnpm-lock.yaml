@@ -281,6 +281,12 @@ importers:
       '@ideasphere/eslint-config':
         specifier: ^0.2.0
         version: link:../../tooling/eslint
+      '@ideasphere/prettier-config':
+        specifier: ^0.2.0
+        version: link:../../tooling/prettier
+      '@ideasphere/tsconfig':
+        specifier: ^0.1.0
+        version: link:../../tooling/typescript
       eslint:
         specifier: ^8.45.0
         version: 8.48.0
@@ -292,7 +298,7 @@ importers:
     dependencies:
       '@prisma/client':
         specifier: ^5.0.0
-        version: 5.0.0
+        version: 5.0.0(prisma@5.0.0)
     devDependencies:
       '@ideasphere/eslint-config':
         specifier: ^0.2.0
@@ -312,6 +318,9 @@ importers:
       prettier:
         specifier: ^3.0.3
         version: 3.0.3
+      prisma:
+        specifier: ^5.0.0
+        version: 5.0.0
       typescript:
         specifier: ^5.2.2
         version: 5.2.2
@@ -3190,7 +3199,7 @@ packages:
       rimraf: 3.0.2
     dev: false
 
-  /@prisma/client@5.0.0:
+  /@prisma/client@5.0.0(prisma@5.0.0):
     resolution: {integrity: sha512-XlO5ELNAQ7rV4cXIDJUNBEgdLwX3pjtt9Q/RHqDpGf43szpNJx2hJnggfFs7TKNx0cOFsl6KJCSfqr5duEU/bQ==}
     engines: {node: '>=16.13'}
     requiresBuild: true
@@ -3201,11 +3210,16 @@ packages:
         optional: true
     dependencies:
       '@prisma/engines-version': 4.17.0-26.6b0aef69b7cdfc787f822ecd7cdc76d5f1991584
+      prisma: 5.0.0
     dev: false
 
   /@prisma/engines-version@4.17.0-26.6b0aef69b7cdfc787f822ecd7cdc76d5f1991584:
     resolution: {integrity: sha512-HHiUF6NixsldsP3JROq07TYBLEjXFKr6PdH8H4gK/XAoTmIplOJBCgrIUMrsRAnEuGyRoRLXKXWUb943+PFoKQ==}
     dev: false
+
+  /@prisma/engines@5.0.0:
+    resolution: {integrity: sha512-kyT/8fd0OpWmhAU5YnY7eP31brW1q1YrTGoblWrhQJDiN/1K+Z8S1kylcmtjqx5wsUGcP1HBWutayA/jtyt+sg==}
+    requiresBuild: true
 
   /@radix-ui/react-compose-refs@1.0.0(react@18.2.0):
     resolution: {integrity: sha512-0KaSv6sx787/hK3eF53iOkiSLwAGlFMx5lotrqD2pTjB18KbybKoEIgkNZTKC60YECDQTKGTRcDBILwZVqVKvA==}
@@ -9841,6 +9855,14 @@ packages:
       ansi-styles: 5.2.0
       react-is: 18.2.0
     dev: false
+
+  /prisma@5.0.0:
+    resolution: {integrity: sha512-KYWk83Fhi1FH59jSpavAYTt2eoMVW9YKgu8ci0kuUnt6Dup5Qy47pcB4/TLmiPAbhGrxxSz7gsSnJcCmkyPANA==}
+    engines: {node: '>=16.13'}
+    hasBin: true
+    requiresBuild: true
+    dependencies:
+      '@prisma/engines': 5.0.0
 
   /process-nextick-args@2.0.1:
     resolution: {integrity: sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==}

@@ -15,8 +15,6 @@ env:
 
 jobs:
   build-lint:
-    env:
-      DATABASE_URL: file:./db.sqlite
     runs-on: ubuntu-latest
 
     steps:
@@ -24,7 +22,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@v2.2.4
+        uses: pnpm/action-setup@v2.4.0
 
       - name: Setup Node 18
         uses: actions/setup-node@v3
@@ -47,13 +45,11 @@ jobs:
       - name: Install deps (with cache)
         run: pnpm install
 
-      # Normally, this would be done as part of the turbo pipeline - however since the Expo app doesn't depend on `@ideasphere/db` it doesn't care.
-      # TODO: Free for all to find a better solution here.
       - name: Generate Prisma Client
-        run: pnpm turbo db:generate
+        run: pnpm db:generate
 
       - name: Build, lint and type-check
-        run: pnpm turbo build lint type-check
+        run: pnpm turbo build lint format typecheck
         env:
           SKIP_ENV_VALIDATION: true
 

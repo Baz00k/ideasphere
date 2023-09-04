@@ -1,5 +1,5 @@
-import { useEffect   } from "react"
-import type {FC, ReactNode} from "react";
+import { useEffect } from "react"
+import type { FC, ReactNode } from "react"
 import { SplashScreen } from "expo-router"
 
 import { useProtectedRoutes } from "~/utils/auth"

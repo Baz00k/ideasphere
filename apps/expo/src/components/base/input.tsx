@@ -1,6 +1,6 @@
 import React from "react"
-import { TextInput  } from "react-native"
-import type {TextInputProps} from "react-native";
+import { TextInput } from "react-native"
+import type { TextInputProps } from "react-native"
 
 export const Input: React.FC<TextInputProps> = ({ className, ...props }) => {
   return (

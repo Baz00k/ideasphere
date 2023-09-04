@@ -1,7 +1,8 @@
 "use client"
 
 import { useState } from "react"
-import { createPagesBrowserClient, type Session } from "@supabase/auth-helpers-nextjs"
+import { createPagesBrowserClient } from "@supabase/auth-helpers-nextjs"
+import type { Session } from "@supabase/auth-helpers-nextjs"
 import { SessionContextProvider } from "@supabase/auth-helpers-react"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools"

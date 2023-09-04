@@ -30,8 +30,8 @@
   "eslintConfig": {
     "root": true,
     "extends": [
-      "@ideashpere/eslint-config/base"
+      "@ideasphere/eslint-config/base"
     ]
   },
-  "prettier": "@ideashpere/prettier-config"
+  "prettier": "@ideasphere/prettier-config"
 }

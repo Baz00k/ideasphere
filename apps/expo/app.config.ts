@@ -27,10 +27,11 @@ const defineConfig = (): ExpoConfig => ({
   assetBundlePatterns: ["**/*"],
   ios: {
     supportsTablet: true,
-    bundleIdentifier: "your.bundle.identifier",
+    bundleIdentifier: "com.ideasphere.app",
     icon: "./assets/ideasphere_icon.png",
   },
   android: {
+    package: "com.ideasphere.app",
     adaptiveIcon: {
       foregroundImage: "./assets/ideasphere_icon.png",
       backgroundColor: "#FFFFFF",

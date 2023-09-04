@@ -1,21 +1,23 @@
 {
-  "name": "@ideasphere/db",
+  "name": "@ideasphere/tailwind-config",
   "version": "0.1.0",
   "private": true,
-  "main": "./index.ts",
-  "types": "./index.ts",
+  "main": "index.ts",
   "license": "MIT",
+  "files": [
+    "index.ts",
+    "postcss.js"
+  ],
   "scripts": {
     "clean": "rm -rf .turbo node_modules",
-    "db:generate": "pnpm with-env prisma generate",
-    "db:push": "pnpm with-env prisma db push --skip-generate",
-    "dev": "pnpm with-env prisma studio --port 5556",
     "lint": "eslint .",
     "format": "prettier --check \"**/*.{mjs,ts,md,json}\"",
-    "with-env": "dotenv -e ../../.env --"
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@prisma/client": "^5.0.0"
+    "autoprefixer": "^10.4.15",
+    "postcss": "8.4.29",
+    "tailwindcss": "3.3.2"
   },
   "devDependencies": {
     "@ideasphere/eslint-config": "^0.2.0",
@@ -28,8 +30,8 @@
   "eslintConfig": {
     "root": true,
     "extends": [
-      "@ideashpere/eslint-config/base"
+      "@ideasphere/eslint-config/base"
     ]
   },
-  "prettier": "@ideashpere/prettier-config"
+  "prettier": "@ideasphere/prettier-config"
 }

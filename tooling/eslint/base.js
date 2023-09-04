@@ -17,23 +17,30 @@ const config = {
   },
   plugins: ["@typescript-eslint", "import"],
   rules: {
+    "turbo/no-undeclared-env-vars": "off",
     "@typescript-eslint/no-unused-vars": [
       "error",
       { argsIgnorePattern: "^_", varsIgnorePattern: "^_" },
     ],
-    "@typescript-eslint/consistent-type-imports": ["error", { prefer: "type-imports" }],
-    "@typescript-eslint/no-misused-promises": [2, { checksVoidReturn: { attributes: false } }],
+    "@typescript-eslint/consistent-type-imports": [
+      "warn",
+      { prefer: "type-imports", fixStyle: "separate-type-imports" },
+    ],
+    "@typescript-eslint/no-misused-promises": [
+      2,
+      { checksVoidReturn: { attributes: false } },
+    ],
+    "import/consistent-type-specifier-style": ["error", "prefer-top-level"],
   },
   ignorePatterns: [
     "**/.eslintrc.cjs",
     "**/*.config.js",
     "**/*.config.cjs",
-    "packages/config/**",
     ".next",
     "dist",
     "pnpm-lock.yaml",
   ],
   reportUnusedDisableDirectives: true,
-}
+};
 
-module.exports = config
+module.exports = config;

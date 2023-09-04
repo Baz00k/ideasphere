@@ -1,30 +1,31 @@
 {
-   "name": "ideasphere",
-   "private": true,
-   "engines": {
-      "node": ">=v18.16.1"
-   },
-   "packageManager": "pnpm@8.7.1",
-   "scripts": {
-      "build": "turbo build",
-      "clean": "git clean -xdf node_modules",
-      "clean:workspaces": "turbo clean",
-      "db:push": "pnpm -F db push",
-      "db:studio": "pnpm -F db dev",
-      "dev": "turbo dev --parallel",
-      "format": "turbo format --continue -- --cache --cache-location='node_modules/.cache/.prettiercache'",
-      "format:fix": "turbo format --continue -- --write --cache --cache-location='node_modules/.cache/.prettiercache'",
-      "lint": "turbo lint --continue -- --cache --cache-location 'node_modules/.cache/.eslintcache' && manypkg check",
-      "lint:fix": "turbo lint --continue -- --fix --cache --cache-location 'node_modules/.cache/.eslintcache' && manypkg fix",
-      "typecheck": "turbo typecheck"
-   },
-   "dependencies": {
-      "@ideasphere/prettier-config": "^0.2.0",
-      "@manypkg/cli": "^0.21.0",
-      "@turbo/gen": "^1.10.13",
-      "prettier": "^3.0.0",
-      "turbo": "^1.10.13",
-      "typescript": "^5.2.2"
-   },
-   "prettier": "@ideasphere/prettier-config"
+  "name": "ideasphere",
+  "private": true,
+  "engines": {
+    "node": ">=v18.16.1"
+  },
+  "packageManager": "pnpm@8.7.1",
+  "scripts": {
+    "build": "turbo build",
+    "clean": "git clean -xdf node_modules",
+    "clean:workspaces": "turbo clean",
+    "db:generate": "pnpm -F db generate",
+    "db:push": "pnpm -F db push",
+    "db:studio": "pnpm -F db dev",
+    "dev": "turbo dev --parallel",
+    "format": "turbo format --continue -- --cache --cache-location='node_modules/.cache/.prettiercache'",
+    "format:fix": "turbo format --continue -- --write --cache --cache-location='node_modules/.cache/.prettiercache'",
+    "lint": "turbo lint --continue -- --cache --cache-location 'node_modules/.cache/.eslintcache' && manypkg check",
+    "lint:fix": "turbo lint --continue -- --fix --cache --cache-location 'node_modules/.cache/.eslintcache' && manypkg fix",
+    "typecheck": "turbo typecheck"
+  },
+  "dependencies": {
+    "@ideasphere/prettier-config": "^0.2.0",
+    "@manypkg/cli": "^0.21.0",
+    "@turbo/gen": "^1.10.13",
+    "prettier": "^3.0.0",
+    "turbo": "^1.10.13",
+    "typescript": "^5.2.2"
+  },
+  "prettier": "@ideasphere/prettier-config"
 }

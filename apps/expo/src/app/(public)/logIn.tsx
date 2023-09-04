@@ -4,8 +4,8 @@ import * as AppleAuth from "expo-apple-authentication"
 import { Link, useRouter } from "expo-router"
 import Icon from "@expo/vector-icons/FontAwesome"
 
-import { signInWithApple, signInWithEmailAndPass } from "~/utils/auth"
 import { Button, Input } from "~/components/base"
+import { signInWithApple, signInWithEmailAndPass } from "~/utils/auth"
 
 const Login: React.FC = () => {
   const router = useRouter()

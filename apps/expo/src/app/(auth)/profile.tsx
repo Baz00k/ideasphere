@@ -3,8 +3,8 @@ import { Text, View } from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context"
 import { useUser } from "@supabase/auth-helpers-react"
 
-import { signOut } from "~/utils/auth"
 import { Button } from "~/components"
+import { signOut } from "~/utils/auth"
 
 const Profile: React.FC = () => {
   const user = useUser()

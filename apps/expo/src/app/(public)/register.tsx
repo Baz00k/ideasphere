@@ -4,8 +4,8 @@ import * as AppleAuth from "expo-apple-authentication"
 import { Link } from "expo-router"
 import Icon from "@expo/vector-icons/FontAwesome"
 
-import { signInWithApple, signUpWithEmailAndPass } from "~/utils/auth"
 import { Button, Input } from "~/components/base"
+import { signInWithApple, signUpWithEmailAndPass } from "~/utils/auth"
 
 const Register: React.FC = () => {
   const [username, setUsername] = useState<string>("")

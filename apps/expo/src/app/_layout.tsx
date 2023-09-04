@@ -3,9 +3,9 @@ import { Stack } from "expo-router"
 import { StatusBar } from "expo-status-bar"
 import { SessionContextProvider } from "@supabase/auth-helpers-react"
 
+import { RouteProtector } from "~/components/auth/routeProtector"
 import { TRPCProvider } from "~/utils/api"
 import { supabase } from "~/utils/auth"
-import { RouteProtector } from "~/components/auth/routeProtector"
 
 const RootLayout = () => {
   return (

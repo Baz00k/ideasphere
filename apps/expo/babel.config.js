@@ -6,11 +6,9 @@ let _tailwindConfig = null
 /**
  * Transpiles tailwind.config.ts for babel
  * Fix until nativewind babel plugin supports tailwind.config.ts files
-*/
+ */
 function lazyLoadConfig() {
-  return (
-    _tailwindConfig ?? loadConfig(path.join(__dirname, "tailwind.config.ts"))
-  )
+  return _tailwindConfig ?? loadConfig(path.join(__dirname, "tailwind.config.ts"))
 }
 
 /** @type {import("@babel/core").ConfigFunction} */

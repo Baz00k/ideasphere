@@ -43,7 +43,7 @@ const Login: React.FC = () => {
         return
       }
 
-      router.push("/home")
+      router.replace("/home")
     } catch (error) {
       console.error(error)
     } finally {

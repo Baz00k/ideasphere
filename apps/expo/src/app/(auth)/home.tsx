@@ -1,6 +1,8 @@
 import { Text, View } from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context"
 
+import { TopWeeklyIdeas } from "~/components/ideas/topWeeklyIdeas"
+
 const Home: React.FC = () => {
   return (
     <SafeAreaView className="h-full w-full bg-white p-2">
@@ -21,6 +23,7 @@ const Home: React.FC = () => {
       <Text className="my-8 text-center text-3xl font-light text-secondary">
         Najpopularniejsze w tym tygodniu
       </Text>
+      <TopWeeklyIdeas />
     </SafeAreaView>
   )
 }

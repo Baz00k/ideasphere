@@ -3,8 +3,6 @@ import { createNextApiHandler } from "@trpc/server/adapters/next"
 
 import { appRouter, createTRPCContext } from "@ideasphere/api"
 
-export const runtime = "nodejs"
-
 /**
  * Configure basic CORS headers
  * You should extend this to match your needs
@@ -20,7 +18,13 @@ const handler = (req: NextApiRequest, res: NextApiResponse) => {
 
   return createNextApiHandler({
     router: appRouter,
-    createContext: (opts) => createTRPCContext(opts),
+    createContext: createTRPCContext,
+    onError:
+      process.env.NODE_ENV === "development"
+        ? ({ path, error }) => {
+            console.error(`❌ tRPC failed on ${path ?? "<no-path>"}: ${error.message}`)
+          }
+        : undefined,
   })(req, res)
 }
 

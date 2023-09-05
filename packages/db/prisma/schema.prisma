@@ -13,12 +13,26 @@ datasource db {
 }
 
 model Profile {
-    id     String  @id @default(cuid())
-    name   String
-    image  String?
-    email  String?
-    userId String  @db.Uuid
-    user   users   @relation(fields: [userId], references: [id], onDelete: Cascade)
+    id       String  @id @default(uuid()) @db.Uuid
+    username String
+    image    String?
+    email    String?
+    userId   String  @db.Uuid
+    user     users   @relation(fields: [userId], references: [id], onDelete: Cascade)
+    // ideas    Idea[]
+
+    @@schema("public")
+}
+
+model Idea {
+    id          String   @id @default(uuid()) @db.Uuid
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
+    title       String
+    description String
+    published   Boolean  @default(false)
+    // authorId    String   @db.Uuid
+    // author      Profile  @relation(fields: [authorId], references: [id], onDelete: Cascade)
 
     @@schema("public")
 }

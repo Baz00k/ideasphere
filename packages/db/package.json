@@ -21,10 +21,10 @@
     "@ideasphere/eslint-config": "^0.2.0",
     "@ideasphere/prettier-config": "^0.2.0",
     "@ideasphere/tsconfig": "^0.1.0",
-    "prisma": "^5.0.0",
     "dotenv-cli": "^7.3.0",
     "eslint": "^8.48.0",
     "prettier": "^3.0.3",
+    "prisma": "^5.0.0",
     "typescript": "^5.2.2"
   },
   "eslintConfig": {

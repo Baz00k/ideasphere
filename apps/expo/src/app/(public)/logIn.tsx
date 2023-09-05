@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { Alert, Text, View } from "react-native"
 import * as AppleAuth from "expo-apple-authentication"
 import { Link, useRouter } from "expo-router"

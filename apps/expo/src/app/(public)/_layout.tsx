@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import { useState } from "react"
 import { Image, Keyboard, Pressable, TouchableWithoutFeedback, View } from "react-native"
 import { PanGestureHandler } from "react-native-gesture-handler"
 import Animated, {

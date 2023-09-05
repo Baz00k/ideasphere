@@ -1,4 +1,3 @@
-import React from "react"
 import { ActivityIndicator, Pressable, Text } from "react-native"
 import type { PressableProps } from "react-native"
 

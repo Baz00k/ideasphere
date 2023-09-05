@@ -1,4 +1,3 @@
-import React from "react"
 import { Image } from "react-native"
 import { Tabs } from "expo-router/tabs"
 import { MaterialIcons } from "@expo/vector-icons"

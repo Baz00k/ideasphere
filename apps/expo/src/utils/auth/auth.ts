@@ -6,9 +6,9 @@ import {
   useRouter,
   useSegments,
 } from "expo-router"
-import { useUser } from "@supabase/auth-helpers-react"
+import { useSessionContext } from "@supabase/auth-helpers-react"
 
-import { supabase } from "~/utils/auth"
+import { supabase } from "~/utils/auth/supabase"
 
 const signOut = async () => {
   const response = await supabase.auth.signOut()
@@ -31,7 +31,7 @@ const signOut = async () => {
  * @returns boolean - true if navigation is ready, false otherwise
  */
 const useProtectedRoutes = () => {
-  const user = useUser()
+  const sessionContext = useSessionContext()
   const router = useRouter()
   const segments = useSegments()
   const rootNavigation = useRootNavigation()
@@ -39,7 +39,6 @@ const useProtectedRoutes = () => {
   const navigation = useNavigation()
 
   const [navigationReady, setNavigationReady] = useState(false)
-  const [userReady, setUserReady] = useState(false)
 
   useEffect(() => {
     // Check if navigation is ready (it is not ready on the first render causing an error)
@@ -56,37 +55,29 @@ const useProtectedRoutes = () => {
 
     setNavigationReady(true)
 
-    if (!userReady) return
+    if (sessionContext.isLoading) return
 
     const inAuthGroup = segments[0] === "(auth)"
     const inPublicGroup = segments[0] === "(public)"
 
     const inNavigationRoot = !inAuthGroup && !inPublicGroup
 
+    const user = sessionContext.session?.user
+
     // If the user is not logged in and they are trying to access an auth route
-    if (!user && (inAuthGroup || !inPublicGroup)) {
+    if (!user && inAuthGroup) {
       // Redirect them to the auth screen
       router.replace("/logIn")
     } else if (user && inNavigationRoot) {
       // User already logged in, redirect them to auth home
       router.replace("/home")
-      // console log current route
     } else if (!user && inNavigationRoot) {
       // User not logged in, redirect them to auth screen
       router.replace("/logIn")
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user, userReady, segments])
-
-  const initializeUser = async () => {
-    await supabase.auth.getUser()
-    setUserReady(true)
-  }
-
-  useEffect(() => {
-    void initializeUser()
-  }, [])
+  }, [sessionContext, segments])
 
   return navigationReady
 }

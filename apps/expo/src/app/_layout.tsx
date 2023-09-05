@@ -1,5 +1,5 @@
 import { SafeAreaProvider } from "react-native-safe-area-context"
-import { Stack } from "expo-router"
+import { Stack, useSegments } from "expo-router"
 import { StatusBar } from "expo-status-bar"
 import { SessionContextProvider } from "@supabase/auth-helpers-react"
 
@@ -8,6 +8,8 @@ import { TRPCProvider } from "~/utils/api"
 import { supabase } from "~/utils/auth"
 
 const RootLayout = () => {
+  const segments = useSegments()
+
   return (
     <SessionContextProvider supabaseClient={supabase}>
       <RouteProtector>
@@ -20,6 +22,7 @@ const RootLayout = () => {
             <Stack
               screenOptions={{
                 headerShown: false,
+                animation: segments.length > 1 ? "default" : "fade",
               }}
             />
             <StatusBar style="dark" animated />

@@ -81,8 +81,8 @@ importers:
         specifier: ~12.3.1
         version: 12.3.1(expo@49.0.9)
       expo-splash-screen:
-        specifier: ~0.20.4
-        version: 0.20.4(expo-modules-autolinking@1.5.1)(expo@49.0.9)
+        specifier: ~0.20.5
+        version: 0.20.5(expo-modules-autolinking@1.5.1)(expo@49.0.9)
       expo-status-bar:
         specifier: ~1.6.0
         version: 1.6.0
@@ -172,8 +172,8 @@ importers:
         specifier: ^0.1.0
         version: link:../../packages/db
       '@supabase/auth-helpers-nextjs':
-        specifier: ^0.7.3
-        version: 0.7.3(@supabase/supabase-js@2.26.0)
+        specifier: ^0.7.4
+        version: 0.7.4(@supabase/supabase-js@2.26.0)
       '@supabase/auth-helpers-react':
         specifier: ^0.4.1
         version: 0.4.1(@supabase/supabase-js@2.26.0)
@@ -3611,8 +3611,8 @@ packages:
       '@sinonjs/commons': 3.0.0
     dev: false
 
-  /@supabase/auth-helpers-nextjs@0.7.3(@supabase/supabase-js@2.26.0):
-    resolution: {integrity: sha512-ikuBGHFnvyfneToj0Y2EfiqUnEr1bdqR6JZiFydPnzACQ2Q7TkcOhkoUSc9/sMEeG7EKX5PhH8riAz42oPdKRg==}
+  /@supabase/auth-helpers-nextjs@0.7.4(@supabase/supabase-js@2.26.0):
+    resolution: {integrity: sha512-MyGCkB7LEDcGrKmesKGjyG54Jlbiss8VGTegrNde/ywXujQyRFnzycijoASDBc6i9SmE7eE1qWBsMr2URb07nw==}
     peerDependencies:
       '@supabase/supabase-js': ^2.19.0
     dependencies:
@@ -6390,7 +6390,7 @@ packages:
       expo-constants: 14.4.2(expo@49.0.9)
       expo-head: 0.0.11(expo-constants@14.4.2)(expo@49.0.9)(react-dom@18.2.0)(react-native@0.72.3)(react@18.2.0)
       expo-linking: 5.0.2(expo@49.0.9)
-      expo-splash-screen: 0.20.4(expo-modules-autolinking@1.5.1)(expo@49.0.9)
+      expo-splash-screen: 0.20.5(expo-modules-autolinking@1.5.1)(expo@49.0.9)
       expo-status-bar: 1.6.0
       metro: 0.76.8
       query-string: 7.1.3
@@ -6418,8 +6418,8 @@ packages:
       expo: 49.0.9(@babel/core@7.22.11)
     dev: false
 
-  /expo-splash-screen@0.20.4(expo-modules-autolinking@1.5.1)(expo@49.0.9):
-    resolution: {integrity: sha512-JMfVqkb3Fbt9mdrWfSkTxaIkjd2RMJmQ19/JN+4Gk2MVEP4L1yzTQLomneH5+z/N5x48Tk3ZN+bFhtUXIlfjzg==}
+  /expo-splash-screen@0.20.5(expo-modules-autolinking@1.5.1)(expo@49.0.9):
+    resolution: {integrity: sha512-nTALYdjHpeEA30rdOWSguxn72ctv8WM8ptuUgpfRgsWyn4i6rwYds/rBXisX69XO5fg+XjHAQqijGx/b28+3tg==}
     peerDependencies:
       expo: '*'
     dependencies:

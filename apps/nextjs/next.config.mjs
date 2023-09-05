@@ -9,11 +9,6 @@ const config = {
   /** We already do linting and typechecking as separate tasks in CI */
   eslint: { ignoreDuringBuilds: true },
   typescript: { ignoreBuildErrors: true },
-
-  // Allow optimizing avatar images from GitHub
-  images: {
-    domains: ["avatars.githubusercontent.com"],
-  },
 }
 
 export default config

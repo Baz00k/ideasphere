@@ -24,7 +24,9 @@ export const env = createEnv({
     DATABASE_URL: process.env.DATABASE_URL,
     NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
     NEXT_PUBLIC_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
-    // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
   },
-  skipValidation: !!process.env.CI || !!process.env.SKIP_ENV_VALIDATION,
+  skipValidation:
+    !!process.env.CI ||
+    !!process.env.SKIP_ENV_VALIDATION ||
+    process.env.npm_lifecycle_event === "lint",
 })

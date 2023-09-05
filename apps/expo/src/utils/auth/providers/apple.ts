@@ -1,7 +1,7 @@
 import { AppleAuthenticationScope, signInAsync } from "expo-apple-authentication"
 import { CryptoDigestAlgorithm, digestStringAsync, randomUUID } from "expo-crypto"
 
-import { supabase } from "~/utils/auth"
+import { supabase } from "~/utils/auth/supabase"
 
 /**
  * Initiates the auth flow for the native Apple Sign In.

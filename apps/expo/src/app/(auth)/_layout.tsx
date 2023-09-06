@@ -42,6 +42,12 @@ export default function Layout() {
           ),
         }}
       />
+      <Tabs.Screen
+        name="idea/[id]"
+        options={{
+          href: null,
+        }}
+      />
     </Tabs>
   )
 }

@@ -1,6 +1,5 @@
 import { useState } from "react"
 import { Text, View } from "react-native"
-import { SafeAreaView } from "react-native-safe-area-context"
 import { useUser } from "@supabase/auth-helpers-react"
 
 import { Button } from "~/components"
@@ -19,11 +18,11 @@ const Profile: React.FC = () => {
 
   return (
     user && (
-      <SafeAreaView className="flex h-full w-full bg-white px-4">
-        <View className="mb-6 flex w-full items-center">
+      <View className="flex h-full w-full bg-white p-4">
+        <View className="mb-4 flex w-full items-center">
           <View className="aspect-square w-1/3 rounded-full bg-gray-200"></View>
         </View>
-        <Text className="my-8 text-center text-2xl font-medium text-secondary">
+        <Text className="my-8 text-center text-xl font-medium text-secondary">
           Zalogowano jako {user.email}
         </Text>
         <Button
@@ -32,7 +31,7 @@ const Profile: React.FC = () => {
           loading={loading}
           className="my-10 mt-auto"
         />
-      </SafeAreaView>
+      </View>
     )
   )
 }

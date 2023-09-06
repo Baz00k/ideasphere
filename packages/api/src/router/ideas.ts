@@ -3,12 +3,32 @@ import { z } from "zod"
 import { createTRPCRouter, protectedProcedure } from "../trpc"
 
 export const ideasRouter = createTRPCRouter({
-  getWeeklyTopIdeas: protectedProcedure.query(({ ctx }) => {
-    return ctx.prisma.idea.findMany({
+  weeklyTopIdeas: protectedProcedure.query(async ({ ctx }) => {
+    const ideas = await ctx.prisma.idea.findMany({
       where: {
         published: true,
+        createdAt: {
+          gte: new Date(Date.now() - 1000 * 60 * 60 * 24 * 7),
+        },
+      },
+      orderBy: {
+        updatedAt: "desc",
       },
       take: 5,
+    })
+    return ideas.map((idea) => {
+      if (idea.description.length > 100) {
+        idea.description = idea.description.substring(0, 100) + "..."
+      }
+      return idea
+    })
+  }),
+
+  byId: protectedProcedure.input(z.object({ id: z.string() })).query(({ ctx, input }) => {
+    return ctx.prisma.idea.findUnique({
+      where: {
+        id: input.id,
+      },
     })
   }),
 

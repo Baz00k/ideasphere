@@ -1,12 +1,19 @@
+import { forwardRef, useImperativeHandle } from "react"
 import { Pressable, Text, View } from "react-native"
 import { Link } from "expo-router"
 import { FlashList } from "@shopify/flash-list"
 
-import { LoadingSpinner } from "~/components"
+import { LoadingSpinner } from "~/components/base/loadingSpinner"
 import { api } from "~/utils/api"
 
-export const TopWeeklyIdeas: React.FC = () => {
-  const { data, isLoading, isError } = api.ideas.weeklyTopIdeas.useQuery()
+export interface TopWeeklyIdeasRef {
+  refetch: () => Promise<void>
+}
+
+export const TopWeeklyIdeas: React.FC = forwardRef(function TopWeeklyIdeasInner(_, ref) {
+  const { data, isLoading, isError, refetch } = api.ideas.weeklyTopIdeas.useQuery()
+
+  useImperativeHandle(ref, () => ({ refetch }))
 
   return (
     <View className="min-h-32 w-full">
@@ -40,7 +47,7 @@ export const TopWeeklyIdeas: React.FC = () => {
       )}
     </View>
   )
-}
+})
 
 const ErrorView: React.FC = () => {
   return (

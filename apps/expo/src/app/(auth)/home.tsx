@@ -1,7 +1,9 @@
-import { ScrollView, Text, View } from "react-native"
+import { useRef, useState } from "react"
+import { RefreshControl, ScrollView, Text, View } from "react-native"
 import { MaterialIcons } from "@expo/vector-icons"
 
-import { TopWeeklyIdeas } from "~/components/ideas/topWeeklyIdeas"
+import { TopWeeklyIdeas } from "~/components"
+import type { TopWeeklyIdeasRef } from "~/components"
 
 interface TopAction {
   label: string
@@ -33,8 +35,21 @@ const TopActions: TopAction[] = [
 ]
 
 const Home: React.FC = () => {
+  const topWeeklyIdeasRef = useRef<TopWeeklyIdeasRef>(null)
+
+  const [isRefreshing, setIsRefreshing] = useState(false)
+
+  const refresh = async () => {
+    setIsRefreshing(true)
+    await topWeeklyIdeasRef.current?.refetch()
+    setIsRefreshing(false)
+  }
+
   return (
-    <ScrollView className="h-full w-full bg-white px-2">
+    <ScrollView
+      className="h-full w-full bg-white px-2"
+      refreshControl={<RefreshControl refreshing={isRefreshing} onRefresh={refresh} />}
+    >
       <View className="my-4 flex w-full flex-row justify-between">
         {TopActions.map((action) => (
           <View key={action.label} className="m-2 flex w-1/5 flex-col justify-center gap-y-2">

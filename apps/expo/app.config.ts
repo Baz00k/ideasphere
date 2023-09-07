@@ -17,7 +17,7 @@ const defineConfig = (): ExpoConfig => ({
   version: "1.0.0",
   orientation: "portrait",
   icon: "./assets/ideasphere_icon.png",
-  userInterfaceStyle: "light",
+  userInterfaceStyle: "automatic",
   splash: {
     image: "./assets/ideasphere_splash.png",
     backgroundColor: "#FFFFFF",

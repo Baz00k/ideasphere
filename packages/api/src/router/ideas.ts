@@ -46,7 +46,7 @@ export const ideasRouter = createTRPCRouter({
           title: input.title,
           description: input.description,
           published: input.published ?? false,
-          // authorId: ctx.user.id,
+          authorId: ctx.user.id,
         },
       })
     }),

@@ -1,49 +1,44 @@
 import { useEffect, useState } from "react"
 import { Alert, Text, View } from "react-native"
-import * as AppleAuth from "expo-apple-authentication"
+import { openURL } from "expo-linking"
 import { Link } from "expo-router"
-import Icon from "@expo/vector-icons/FontAwesome"
 
 import { Button, Input } from "~/components/base"
-import { signInWithApple, signUpWithEmailAndPass } from "~/utils/auth"
+import { api, getBaseUrl } from "~/utils/api"
 
 const SignUp: React.FC = () => {
   const [username, setUsername] = useState<string>("")
   const [email, setEmail] = useState<string>("")
   const [password, setPassword] = useState<string>("")
 
-  const [loading, setLoading] = useState<boolean>(false)
-
-  const [isAppleSignInAvailable, setIsAppleSignInAvailable] = useState<boolean>(false)
+  const {
+    mutate: createUser,
+    error,
+    isLoading,
+    data,
+  } = api.auth.createUser.useMutation({
+    onSuccess() {
+      setUsername("")
+      setEmail("")
+      setPassword("")
+    },
+  })
 
   useEffect(() => {
-    const checkIfAppleSignInIsAvailable = async () => {
-      const isAvailable = await AppleAuth.isAvailableAsync()
-      setIsAppleSignInAvailable(isAvailable)
-    }
+    if (!data) return
+    Alert.alert(
+      "Utworzono konto",
+      "Właśnie otworzył się link weryfikacyjny w przeglądarce. W przyszłości zostanie on wysłany na maila. Nawet jeśli strona nie otworzyła się, nie przejmuj się. Twoje konto zostało zweryfikowane. Możesz teraz się zalogować.",
+    )
+    void verifyEmail(data)
+  }, [data])
 
-    void checkIfAppleSignInIsAvailable()
-  }, [])
+  const verifyEmail = async (url: string) => {
+    await openURL(url)
+  }
 
-  const handleLogin = async () => {
-    setLoading(true)
-    try {
-      const { error } = await signUpWithEmailAndPass(email, password, username)
-
-      if (error) {
-        Alert.alert(error.message)
-        return
-      }
-
-      Alert.alert(
-        "Rejestracja zakończona sukcesem!",
-        "Sprawdź swoją skrzynkę pocztową, aby zweryfikować konto.",
-      )
-    } catch (error) {
-      console.error(error)
-    } finally {
-      setLoading(false)
-    }
+  const handleSignUp = () => {
+    createUser({ username, email, password, redirectUrl: `${getBaseUrl()}/auth/verify` })
   }
 
   return (
@@ -73,33 +68,28 @@ const SignUp: React.FC = () => {
           secureTextEntry
           autoCapitalize="none"
         />
-        <View>
-          <Text className="mx-auto mb-4 text-sm text-gray-500">Lub kontynuuj z:</Text>
-          <View className="flex h-10 flex-row justify-center gap-2">
-            <View className="flex w-1/6 flex-row items-center justify-center rounded-lg bg-[#DB4437]">
-              <Icon name="google" size={20} color="white" />
-            </View>
-            <View className="flex w-1/6 flex-row items-center justify-center rounded-lg bg-[#3B5998]">
-              <Icon name="facebook" size={20} color="white" />
-            </View>
-          </View>
-          {isAppleSignInAvailable && (
-            <AppleAuth.AppleAuthenticationButton
-              buttonType={AppleAuth.AppleAuthenticationButtonType.SIGN_UP}
-              buttonStyle={AppleAuth.AppleAuthenticationButtonStyle.BLACK}
-              className="mx-auto h-14 w-1/2"
-              cornerRadius={8}
-              onPress={signInWithApple}
-            />
-          )}
-        </View>
+
         <Button
           className="self-center"
-          onPress={handleLogin}
+          onPress={handleSignUp}
           text="Zarejestruj się"
-          loading={loading}
+          loading={isLoading}
         />
       </View>
+
+      {/* TODO: Better error handling */}
+      {error?.data?.zodError && (
+        <View className="my-8">
+          <View className="flex gap-y-2 rounded bg-gray-100/50 p-4">
+            {Object.keys(error.data.zodError.fieldErrors).map((key) => (
+              <Text key={key} className="text-center text-red-500">
+                {key}: {error.data!.zodError!.fieldErrors[key]}
+              </Text>
+            ))}
+          </View>
+        </View>
+      )}
+
       <View className="mb-2 mt-auto flex flex-row justify-center pt-4">
         <Text className="text-md text-gray-800">
           Masz już konto?{" "}

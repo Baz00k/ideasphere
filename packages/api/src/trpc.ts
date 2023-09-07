@@ -8,13 +8,24 @@
  */
 import { createPagesServerClient } from "@supabase/auth-helpers-nextjs"
 import type { User } from "@supabase/auth-helpers-nextjs"
-import type { SupabaseClient } from "@supabase/supabase-js"
+import { createClient } from "@supabase/supabase-js"
 import { initTRPC, TRPCError } from "@trpc/server"
 import type { CreateNextContextOptions } from "@trpc/server/adapters/next"
 import superjson from "superjson"
 import { ZodError } from "zod"
 
 import { prisma } from "@ideasphere/db"
+
+const supabaseAdmin = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL ?? "",
+  process.env.SUPABASE_SERVICE_ROLE_KEY ?? "",
+  {
+    auth: {
+      autoRefreshToken: false,
+      persistSession: false,
+    },
+  },
+)
 
 /**
  * 1. CONTEXT
@@ -27,7 +38,6 @@ import { prisma } from "@ideasphere/db"
  */
 interface CreateContextOptions {
   user: User | null
-  supabase: SupabaseClient
 }
 
 /**
@@ -39,10 +49,10 @@ interface CreateContextOptions {
  * - trpc's `createSSGHelpers` where we don't have req/res
  * @see https://create.t3.gg/en/usage/trpc#-servertrpccontextts
  */
-export const createInnerTRPCContext = ({ user, supabase }: CreateContextOptions) => {
+export const createInnerTRPCContext = ({ user }: CreateContextOptions) => {
   return {
     user,
-    supabase,
+    supabaseAdmin,
     db: prisma,
   }
 }
@@ -63,7 +73,6 @@ export const createTRPCContext = async (opts: CreateNextContextOptions) => {
 
   return createInnerTRPCContext({
     user: user.data.user,
-    supabase,
   })
 }
 

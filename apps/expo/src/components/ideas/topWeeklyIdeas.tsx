@@ -23,7 +23,7 @@ export const TopWeeklyIdeas: React.FC = forwardRef(function TopWeeklyIdeasInner(
       {isLoading && <LoadingSpinner />}
       {isError && <ErrorView />}
       {data && data.length === 0 && <EmptyView />}
-      {data && (
+      {data && data.length > 0 && (
         <FlashList
           data={data}
           renderItem={({ item }) => (

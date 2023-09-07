@@ -1,9 +1,9 @@
 import { forwardRef, useImperativeHandle } from "react"
-import { Pressable, Text, View } from "react-native"
-import { Link } from "expo-router"
+import { Text, View } from "react-native"
 import { FlashList } from "@shopify/flash-list"
 
 import { LoadingSpinner } from "~/components/base/loadingSpinner"
+import { IdeaListItem } from "~/components/ideas/ideaListItem"
 import { api } from "~/utils/api"
 
 export interface TopWeeklyIdeasRef {
@@ -26,22 +26,7 @@ export const TopWeeklyIdeas: React.FC = forwardRef(function TopWeeklyIdeasInner(
       {data && data.length > 0 && (
         <FlashList
           data={data}
-          renderItem={({ item }) => (
-            <Link
-              href={{
-                pathname: "/idea/[id]",
-                params: { id: item.id },
-              }}
-              asChild
-            >
-              <Pressable className="mx-4 my-2 rounded-md bg-gray-100 px-4 py-2">
-                <Text className="text-center text-xl font-bold">{item.title}</Text>
-                <Text className="line-clamp-1 max-h-4 text-ellipsis text-center">
-                  {item.description}
-                </Text>
-              </Pressable>
-            </Link>
-          )}
+          renderItem={({ item }) => <IdeaListItem item={item} />}
           estimatedItemSize={100}
         />
       )}

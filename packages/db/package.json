@@ -25,7 +25,11 @@
     "eslint": "^8.48.0",
     "prettier": "^3.0.3",
     "prisma": "^5.0.0",
-    "typescript": "^5.2.2"
+    "typescript": "^5.2.2",
+    "ts-node": "^10.9.1"
+  },
+  "prisma": {
+    "seed": "ts-node ./prisma/seed.ts"
   },
   "eslintConfig": {
     "root": true,

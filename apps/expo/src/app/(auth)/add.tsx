@@ -21,16 +21,21 @@ const Add: React.FC = () => {
 
   return (
     <SafeAreaView className="flex h-full w-full items-center bg-white text-center">
-      <Text className="text-2xl font-bold">Dodaj nowe atrakcje</Text>
-      <Input className="mt-4" placeholder="Tytuł" value={title} onChangeText={setTitle} />
+      <Text className="mb-12 mt-4 text-3xl font-bold">Dodaj nowe atrakcje</Text>
       <Input
-        className="mt-4"
+        className="mx-8 my-2 w-full bg-gray-50"
+        placeholder="Tytuł"
+        value={title}
+        onChangeText={setTitle}
+      />
+      <Input
+        className="mx-8 my-2 w-full bg-gray-50"
         placeholder="Opis"
         value={description}
         onChangeText={setDescription}
       />
       <Button
-        className="mt-4"
+        className="m-4 w-48"
         onPress={() => mutate({ title, description, published: true })}
         loading={isLoading}
       >

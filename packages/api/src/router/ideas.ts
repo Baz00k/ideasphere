@@ -4,7 +4,7 @@ import { createTRPCRouter, protectedProcedure } from "../trpc"
 
 export const ideasRouter = createTRPCRouter({
   weeklyTopIdeas: protectedProcedure.query(async ({ ctx }) => {
-    const ideas = await ctx.prisma.idea.findMany({
+    const ideas = await ctx.db.idea.findMany({
       where: {
         published: true,
         createdAt: {
@@ -25,7 +25,7 @@ export const ideasRouter = createTRPCRouter({
   }),
 
   byId: protectedProcedure.input(z.object({ id: z.string() })).query(({ ctx, input }) => {
-    return ctx.prisma.idea.findUnique({
+    return ctx.db.idea.findUnique({
       where: {
         id: input.id,
       },
@@ -41,7 +41,7 @@ export const ideasRouter = createTRPCRouter({
       }),
     )
     .mutation(({ ctx, input }) => {
-      return ctx.prisma.idea.create({
+      return ctx.db.idea.create({
         data: {
           title: input.title,
           description: input.description,

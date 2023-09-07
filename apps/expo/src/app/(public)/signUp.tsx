@@ -7,7 +7,7 @@ import Icon from "@expo/vector-icons/FontAwesome"
 import { Button, Input } from "~/components/base"
 import { signInWithApple, signUpWithEmailAndPass } from "~/utils/auth"
 
-const Register: React.FC = () => {
+const SignUp: React.FC = () => {
   const [username, setUsername] = useState<string>("")
   const [email, setEmail] = useState<string>("")
   const [password, setPassword] = useState<string>("")
@@ -112,4 +112,4 @@ const Register: React.FC = () => {
   )
 }
 
-export default Register
+export default SignUp

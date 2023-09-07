@@ -103,7 +103,7 @@ const Login: React.FC = () => {
       <View className="mb-2 mt-auto flex flex-row justify-center pt-4">
         <Text className="text-md text-gray-800">
           Nie masz jeszcze konta?{" "}
-          <Link href="/register" className="text-md text-secondary">
+          <Link href="/signUp" className="text-md text-secondary">
             Zarejestruj się!
           </Link>
         </Text>

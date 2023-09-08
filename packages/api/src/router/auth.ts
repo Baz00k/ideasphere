@@ -26,6 +26,19 @@ export const authRouter = createTRPCRouter({
       }),
     )
     .mutation(async ({ ctx, input }) => {
+      const existingUser = await ctx.db.profile.findUnique({
+        where: {
+          email: input.email,
+        },
+      })
+
+      if (existingUser) {
+        throw new TRPCError({
+          code: "BAD_REQUEST",
+          message: "User already exists",
+        })
+      }
+
       const response = await ctx.supabaseAdmin.auth.admin.generateLink({
         type: "signup",
         email: input.email,
@@ -34,6 +47,8 @@ export const authRouter = createTRPCRouter({
           redirectTo: input.redirectUrl,
         },
       })
+
+      // TODO: Send email to user with link
 
       if (response.error) {
         throw new TRPCError({

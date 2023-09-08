@@ -11,17 +11,42 @@ export const ideasRouter = createTRPCRouter({
           gte: new Date(Date.now() - 1000 * 60 * 60 * 24 * 7),
         },
       },
-      orderBy: {
-        updatedAt: "desc",
+      orderBy: [
+        {
+          favoritedBy: {
+            _count: "desc",
+          },
+        },
+        {
+          createdAt: "desc",
+        },
+      ],
+      select: {
+        id: true,
+        title: true,
+        description: true,
+        favoritedBy: {
+          where: {
+            userId: ctx.user.id,
+          },
+          select: {
+            _count: true,
+          },
+        },
+        _count: {
+          select: {
+            favoritedBy: true,
+          },
+        },
       },
-      take: 5,
+      take: 10,
     })
-    return ideas.map((idea) => {
-      if (idea.description.length > 100) {
-        idea.description = idea.description.substring(0, 100) + "..."
-      }
-      return idea
-    })
+
+    return ideas.map((idea) => ({
+      ...idea,
+      description: idea.description.slice(0, 100),
+      favoritedByMe: idea.favoritedBy.length > 0,
+    }))
   }),
 
   byId: protectedProcedure.input(z.object({ id: z.string() })).query(({ ctx, input }) => {
@@ -50,4 +75,34 @@ export const ideasRouter = createTRPCRouter({
         },
       })
     }),
+
+  favourite: protectedProcedure.input(z.object({ id: z.string() })).mutation(({ ctx, input }) => {
+    return ctx.db.idea.update({
+      where: {
+        id: input.id,
+      },
+      data: {
+        favoritedBy: {
+          connect: {
+            userId: ctx.user.id,
+          },
+        },
+      },
+    })
+  }),
+
+  unfavourite: protectedProcedure.input(z.object({ id: z.string() })).mutation(({ ctx, input }) => {
+    return ctx.db.idea.update({
+      where: {
+        id: input.id,
+      },
+      data: {
+        favoritedBy: {
+          disconnect: {
+            userId: ctx.user.id,
+          },
+        },
+      },
+    })
+  }),
 })

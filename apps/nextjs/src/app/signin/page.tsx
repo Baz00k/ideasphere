@@ -12,34 +12,26 @@ export default function SigninPage() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [showPassword, setShowPassword] = useState(false)
-  const [isSignUp, setIsSignUp] = useState(false)
 
   const signInWithPassword = async () => {
-    const { error, data } = isSignUp
-      ? await supabase.auth.signUp({
-          email,
-          password,
-        })
-      : await supabase.auth.signInWithPassword({
-          email,
-          password,
-        })
+    const { error, data } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    })
+
     if (error) alert(error.message)
-    else if (isSignUp && data.user) {
-      alert("Check your email for a confirmation link.")
-      setIsSignUp(false)
-    } else if (data.user) {
+    else if (data.user) {
       router.push("/")
     }
   }
 
   return (
-    <main className="flex h-screen bg-zinc-900 text-zinc-200">
-      <div className="mx-auto flex flex-col items-center justify-center gap-6">
-        <h1 className="text-3xl font-extrabold tracking-tight">Sign In</h1>
-        <div className="flex w-full flex-col gap-4">
+    <main className="flex h-screen bg-primary/80">
+      <div className="mx-auto flex min-w-fit flex-col items-center justify-center gap-6">
+        <h1 className="text-3xl font-bold">Sign In</h1>
+        <div className="flex w-full flex-col gap-6">
           <input
-            className="rounded-lg bg-white/10 px-4 py-1 text-zinc-200 transition hover:bg-white/20"
+            className="rounded-lg bg-white/50 px-4 py-1  transition hover:bg-white/60"
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -47,7 +39,7 @@ export default function SigninPage() {
           />
           <div className="relative">
             <input
-              className="w-full rounded-lg bg-white/10 px-4 py-1 text-zinc-200 transition hover:bg-white/20"
+              className="w-full rounded-lg bg-white/50 px-4 py-1 transition hover:bg-white/60"
               type={showPassword ? "text" : "password"}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -61,13 +53,10 @@ export default function SigninPage() {
             </button>
           </div>
           <button
-            className="w-full rounded-lg bg-emerald-400 py-2 font-semibold text-zinc-900 no-underline transition hover:bg-emerald-500"
+            className="w-full rounded-lg bg-secondary py-2 font-semibold text-white no-underline transition hover:bg-secondary/90"
             onClick={signInWithPassword}
           >
-            {isSignUp ? "Sign Up" : "Sign In"}
-          </button>
-          <button onClick={() => setIsSignUp((s) => !s)} className="mt-4">
-            {isSignUp ? "Already have an account?" : "Don't have an account?"}
+            Sign In
           </button>
         </div>
       </div>

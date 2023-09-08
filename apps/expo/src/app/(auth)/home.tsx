@@ -41,7 +41,7 @@ const Home: React.FC = () => {
 
   const refresh = async () => {
     setIsRefreshing(true)
-    await topWeeklyIdeasRef.current?.refetch()
+    await topWeeklyIdeasRef.current?.refresh()
     setIsRefreshing(false)
   }
 
@@ -61,7 +61,7 @@ const Home: React.FC = () => {
         ))}
       </View>
 
-      <TopWeeklyIdeas />
+      <TopWeeklyIdeas ref={topWeeklyIdeasRef} />
     </ScrollView>
   )
 }

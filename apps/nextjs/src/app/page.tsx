@@ -5,9 +5,12 @@ import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react"
 
 export default function HomePage() {
   return (
-    <main className="flex h-screen flex-col items-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
-      <div className="container mt-12 flex flex-col items-center justify-center gap-y-10 px-4 py-8">
+    <main className="flex h-screen flex-col items-center bg-gradient-to-b from-secondary to-primary text-white">
+      <div className="container mt-12 flex flex-col items-center justify-center gap-y-12 px-4 py-8">
         <h1 className="text-5xl font-bold sm:text-[5rem]">IdeaSphere</h1>
+        <p className="text-center text-2xl">
+          A place to share your ideas and get inspired by others
+        </p>
         <AuthShowcase />
       </div>
     </main>

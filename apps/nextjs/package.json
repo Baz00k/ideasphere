@@ -18,7 +18,7 @@
     "@supabase/auth-helpers-nextjs": "^0.7.4",
     "@supabase/auth-helpers-react": "^0.4.2",
     "@supabase/supabase-js": "^2.33.1",
-    "@t3-oss/env-nextjs": "^0.6.0",
+    "@t3-oss/env-nextjs": "^0.6.1",
     "@tanstack/react-query": "^4.29.25",
     "@tanstack/react-query-devtools": "^4.29.23",
     "@tanstack/react-query-next-experimental": "5.0.0-alpha.80",

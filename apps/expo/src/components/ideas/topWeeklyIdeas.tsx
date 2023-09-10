@@ -117,7 +117,7 @@ export const TopWeeklyIdeas = forwardRef<TopWeeklyIdeasRef>(function TopWeeklyId
   }, [data])
 
   return (
-    <View className="min-h-32 w-full">
+    <View className="min-h-full w-full">
       <Text className="mb-6 text-center text-2xl font-light text-secondary">
         Najpopularniejsze w tym tygodniu
       </Text>

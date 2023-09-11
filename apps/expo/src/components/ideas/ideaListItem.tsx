@@ -21,7 +21,7 @@ export const IdeaListItem: React.FC<IdeaListItemProps> = ({ item, favourite, unf
       asChild
     >
       <TouchableOpacity
-        className="mx-4 my-1 flex flex-row items-center justify-between rounded-2xl bg-primary px-4 py-3"
+        className="mx-4 my-1 flex flex-row items-center justify-between rounded-3xl bg-secondary px-4 py-3"
         activeOpacity={0.8}
       >
         <View className="flex-column ml-2 flex w-4/5 flex-shrink">

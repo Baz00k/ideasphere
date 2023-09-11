@@ -16,6 +16,7 @@
     "with-env": "dotenv -e ../../.env --"
   },
   "dependencies": {
+    "@expo-google-fonts/comfortaa": "^0.2.3",
     "@expo/metro-config": "^0.10.7",
     "@expo/vector-icons": "^13.0.0",
     "@shopify/flash-list": "1.5.0",
@@ -29,6 +30,7 @@
     "expo-apple-authentication": "~6.1.0",
     "expo-constants": "~14.4.2",
     "expo-crypto": "^12.4.1",
+    "expo-font": "~11.4.0",
     "expo-image": "^1.3.2",
     "expo-linking": "~5.0.2",
     "expo-router": "^2.0.5",

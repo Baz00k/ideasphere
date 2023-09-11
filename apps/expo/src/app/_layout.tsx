@@ -3,16 +3,15 @@ import { Stack, useSegments } from "expo-router"
 import { StatusBar } from "expo-status-bar"
 import { SessionContextProvider } from "@supabase/auth-helpers-react"
 
-import { RouteProtector } from "~/components/auth/routeProtector"
+import { AssetsLoader } from "~/components"
 import { TRPCProvider } from "~/utils/api"
 import { supabase } from "~/utils/auth"
 
 const RootLayout = () => {
   const segments = useSegments()
-
   return (
     <SessionContextProvider supabaseClient={supabase}>
-      <RouteProtector>
+      <AssetsLoader>
         <TRPCProvider>
           <SafeAreaProvider>
             {/*
@@ -28,7 +27,7 @@ const RootLayout = () => {
             <StatusBar style="dark" animated />
           </SafeAreaProvider>
         </TRPCProvider>
-      </RouteProtector>
+      </AssetsLoader>
     </SessionContextProvider>
   )
 }

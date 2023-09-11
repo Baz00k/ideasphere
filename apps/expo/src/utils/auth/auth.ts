@@ -1,11 +1,5 @@
 import { useEffect, useState } from "react"
-import {
-  useNavigation,
-  useRootNavigation,
-  useRootNavigationState,
-  useRouter,
-  useSegments,
-} from "expo-router"
+import { useRootNavigation, useRouter, useSegments } from "expo-router"
 import { useSessionContext } from "@supabase/auth-helpers-react"
 
 import { supabase } from "~/utils/auth/supabase"
@@ -35,21 +29,13 @@ const useProtectedRoutes = () => {
   const router = useRouter()
   const segments = useSegments()
   const rootNavigation = useRootNavigation()
-  const rootNavigationState = useRootNavigationState()
-  const navigation = useNavigation()
 
   const [navigationReady, setNavigationReady] = useState(false)
 
   useEffect(() => {
     // Check if navigation is ready (it is not ready on the first render causing an error)
     // See: https://github.com/expo/router/issues/740
-    if (
-      !rootNavigation ||
-      rootNavigation.isReady() === false ||
-      !navigation ||
-      !rootNavigationState ||
-      rootNavigationState.stale
-    ) {
+    if (!rootNavigation || !rootNavigation.isReady()) {
       return
     }
 

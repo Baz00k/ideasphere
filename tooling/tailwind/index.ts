@@ -8,6 +8,9 @@ export default {
     extend: {
       colors,
     },
+    fontFamily: {
+      comfortaa: ["Comfortaa"],
+    },
   },
   plugins: [],
 } satisfies Config

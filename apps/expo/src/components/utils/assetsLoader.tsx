@@ -1,0 +1,34 @@
+import { useEffect } from "react"
+import { SplashScreen } from "expo-router"
+import {
+  Comfortaa_300Light,
+  Comfortaa_400Regular,
+  Comfortaa_700Bold,
+  useFonts,
+} from "@expo-google-fonts/comfortaa"
+
+import { useProtectedRoutes } from "~/utils/auth"
+
+SplashScreen.preventAutoHideAsync()
+
+interface AssetsLoaderProps {
+  children: React.ReactNode
+}
+
+export const AssetsLoader: React.FC<AssetsLoaderProps> = ({ children }) => {
+  const navigationReady = useProtectedRoutes()
+
+  const [fontsLoaded] = useFonts({
+    Comfortaa_300Light,
+    Comfortaa_400Regular,
+    Comfortaa_700Bold,
+  })
+
+  useEffect(() => {
+    if (navigationReady && fontsLoaded) {
+      SplashScreen.hideAsync()
+    }
+  }, [navigationReady, fontsLoaded])
+
+  return <>{children}</>
+}

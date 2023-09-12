@@ -3,12 +3,20 @@ import { createNextApiHandler } from "@trpc/server/adapters/next"
 
 import { appRouter, createTRPCContext } from "@ideasphere/api"
 
-/**
- * Configure basic CORS headers
- * You should extend this to match your needs
- */
+const getAllowedOrigins = () => {
+  if (process.env.VERCEL_URL) {
+    return [`https://${process.env.VERCEL_URL}`]
+  }
+
+  if (process.env.NODE_ENV === "development") {
+    return ["*"]
+  }
+
+  return ["localhost:3000"]
+}
+
 function setCorsHeaders(res: NextApiResponse) {
-  res.setHeader("Access-Control-Allow-Origin", "*")
+  res.setHeader("Access-Control-Allow-Origin", getAllowedOrigins())
   res.setHeader("Access-Control-Allow-Methods", "*")
   res.setHeader("Access-Control-Allow-Headers", "*")
 }

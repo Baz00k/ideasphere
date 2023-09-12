@@ -30,10 +30,13 @@ export const getBaseUrl = () => {
   const debuggerHost = Constants.expoConfig?.hostUri
 
   const localhost = debuggerHost?.split(":")[0]
-  if (!localhost) {
-    // return "https://your-production-url.com";
-    throw new Error("Failed to get localhost. Please point to your production server.")
+
+  if (!localhost || process.env.NODE_ENV === "production") {
+    if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`
+
+    return process.env.BASE_URL ? `https://${process.env.BASE_URL}` : "https://ideasphere.buzuk.dev"
   }
+
   return `http://${localhost}:3000`
 }
 

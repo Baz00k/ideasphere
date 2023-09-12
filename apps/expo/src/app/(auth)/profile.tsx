@@ -24,22 +24,29 @@ const Profile: React.FC = () => {
     )
 
   return (
-    data && (
-      <View className="flex h-full w-full bg-white p-4">
-        <View className="mb-4 flex w-full items-center">
-          <View className="flex aspect-square w-1/3 items-center justify-center rounded-full bg-gray-100">
-            <Text className="h-8 text-5xl text-secondary">{data.username[0]}</Text>
-          </View>
+    <View className="flex h-full w-full bg-white p-4">
+      {loading && (
+        <View className="flex h-full w-full items-center justify-center">
+          <LoadingSpinner />
         </View>
-        <Text className="my-4 text-center text-xl font-medium text-secondary">{data.username}</Text>
-        <Button
-          onPress={handleSignOut}
-          text="Wyloguj"
-          loading={loading}
-          className="my-10 mt-auto"
-        />
-      </View>
-    )
+      )}
+      {data && (
+        <>
+          <View className="mb-4 flex w-full items-center">
+            <View className="flex aspect-square w-1/3 items-center justify-center rounded-full bg-gray-100">
+              <Text className="h-8 text-5xl text-primary">{data.username[0]}</Text>
+            </View>
+          </View>
+          <Text className="my-4 text-center text-2xl text-primary">{data.username}</Text>
+          <Button
+            onPress={handleSignOut}
+            text="Wyloguj"
+            loading={loading}
+            className="my-8 mt-auto"
+          />
+        </>
+      )}
+    </View>
   )
 }
 

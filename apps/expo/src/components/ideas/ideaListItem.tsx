@@ -21,12 +21,14 @@ export const IdeaListItem: React.FC<IdeaListItemProps> = ({ item, favourite, unf
       asChild
     >
       <TouchableOpacity
-        className="mx-4 my-1 flex flex-row items-center justify-between rounded-3xl bg-secondary px-4 py-3"
+        className="mx-2 my-1 flex flex-row items-center justify-between rounded-3xl bg-secondary px-4 py-3"
         activeOpacity={0.8}
       >
         <View className="flex-column ml-2 flex w-4/5 flex-shrink">
-          <Text className="text-xl font-bold">{item.title}</Text>
-          <Text className="line-clamp-1 max-h-4 text-ellipsis">{item.description}</Text>
+          <Text className="font-conmfortaa_700 text-xl">{item.title}</Text>
+          <Text className="line-clamp-1  max-h-4 text-ellipsis font-comfortaa_300">
+            {item.description}
+          </Text>
         </View>
         <Pressable
           className="flex-column flex flex-shrink px-2"

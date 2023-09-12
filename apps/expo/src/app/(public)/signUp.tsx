@@ -43,7 +43,9 @@ const SignUp: React.FC = () => {
 
   return (
     <>
-      <Text className="mx-auto mb-12 mt-auto text-4xl text-secondary">Rejestracja</Text>
+      <Text className="font-comfortaa_400 mx-auto mb-12 mt-auto text-4xl text-secondary">
+        Rejestracja
+      </Text>
       <View className="flex w-10/12 flex-col gap-y-8">
         <Input
           value={username}
@@ -91,7 +93,7 @@ const SignUp: React.FC = () => {
       )}
 
       <View className="mb-2 mt-auto flex flex-row justify-center pt-4">
-        <Text className="text-md text-gray-800">
+        <Text className="text-md text-gray-100">
           Masz już konto?{" "}
           <Link href="/logIn" className="text-md text-secondary">
             Zaloguj się!

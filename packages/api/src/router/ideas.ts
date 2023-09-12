@@ -58,6 +58,13 @@ export const ideasRouter = createTRPCRouter({
       where: {
         id: input.id,
       },
+      include: {
+        _count: {
+          select: {
+            favoritedBy: true,
+          },
+        },
+      },
     })
   }),
 

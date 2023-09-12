@@ -9,7 +9,9 @@ export default {
       colors,
     },
     fontFamily: {
-      comfortaa: ["Comfortaa"],
+      comfortaa_300: "Comfortaa_300Light",
+      comfortaa_400: "Comfortaa_400Regular",
+      conmfortaa_700: "Comfortaa_700Bold",
     },
   },
   plugins: [],

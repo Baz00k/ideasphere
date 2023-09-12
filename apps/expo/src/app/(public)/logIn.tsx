@@ -53,7 +53,7 @@ const Login: React.FC = () => {
 
   return (
     <>
-      <Text className="font-comfortaa_400 mx-auto mb-12 mt-auto text-4xl text-secondary">
+      <Text className="mx-auto mb-12 mt-auto font-comfortaa_400 text-4xl text-secondary">
         Zaloguj się
       </Text>
       <View className="flex w-10/12 flex-col gap-y-8">

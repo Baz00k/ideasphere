@@ -30,7 +30,11 @@ export const ideasRouter = createTRPCRouter({
             userId: ctx.user.id,
           },
           select: {
-            _count: true,
+            _count: {
+              select: {
+                favoritedIdeas: true,
+              },
+            },
           },
         },
         _count: {

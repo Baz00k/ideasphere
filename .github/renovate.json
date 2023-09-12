@@ -11,5 +11,6 @@
   "rangeStrategy": "bump",
   "automerge": true,
   "labels": ["automated"],
-  "schedule": ["every weekend"]
+  "schedule": ["at any time"],
+  "automergeSchedule": ["every weekend"]
 }

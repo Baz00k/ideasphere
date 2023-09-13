@@ -14,7 +14,7 @@ const Home: React.FC = () => {
 
   const refresh = async () => {
     setIsRefreshing(true)
-    await topWeeklyIdeasRef.current?.refresh()
+    await Promise.allSettled([topWeeklyIdeasRef.current?.refetch()])
     setIsRefreshing(false)
   }
 

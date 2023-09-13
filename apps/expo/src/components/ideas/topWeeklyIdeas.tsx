@@ -10,13 +10,13 @@ import { IdeaListItem } from "~/components/ideas/ideaListItem"
 import { api } from "~/utils/api"
 
 export interface TopWeeklyIdeasRef {
-  refresh: () => Promise<void>
+  refetch: () => Promise<unknown>
 }
 
 type FlashListData = inferRouterOutputs<AppRouter>["ideas"]["weeklyTopIdeas"][number]
 
 export const TopWeeklyIdeas = forwardRef<TopWeeklyIdeasRef>(function TopWeeklyIdeasInner(_, ref) {
-  useImperativeHandle(ref, () => ({ refresh }))
+  useImperativeHandle(ref, () => ({ refetch }))
 
   const listRef = useRef<FlashList<FlashListData>>(null)
   const [listData, setListData] = useState<typeof data>()
@@ -26,7 +26,7 @@ export const TopWeeklyIdeas = forwardRef<TopWeeklyIdeasRef>(function TopWeeklyId
     await utils.ideas.weeklyTopIdeas.invalidate()
   }
 
-  const { data, isLoading, isError } = api.ideas.weeklyTopIdeas.useQuery()
+  const { data, isLoading, isError, refetch } = api.ideas.weeklyTopIdeas.useQuery()
   const { mutate: favourite } = api.ideas.favourite.useMutation({
     onSuccess: invalidateTopWeeklyIdeas,
 
@@ -97,10 +97,6 @@ export const TopWeeklyIdeas = forwardRef<TopWeeklyIdeasRef>(function TopWeeklyId
     },
   })
 
-  const refresh = async () => {
-    await utils.ideas.weeklyTopIdeas.invalidate()
-  }
-
   useEffect(() => {
     setListData(data)
     listRef.current?.prepareForLayoutAnimationRender()
@@ -113,12 +109,16 @@ export const TopWeeklyIdeas = forwardRef<TopWeeklyIdeasRef>(function TopWeeklyId
       update: {
         type: LayoutAnimation.Types.easeInEaseOut,
       },
+      delete: {
+        type: LayoutAnimation.Types.easeInEaseOut,
+        property: LayoutAnimation.Properties.opacity,
+      },
     })
   }, [data])
 
   return (
-    <View className="w-full">
-      <Text className="mb-6 mt-2 text-center font-comfortaa_400 text-xl text-primary">
+    <View className="min-h-full w-full">
+      <Text className="mb-6 text-center font-comfortaa_400 text-xl text-primary">
         Najpopularniejsze w tym tygodniu
       </Text>
       {isLoading && <LoadingSpinner />}

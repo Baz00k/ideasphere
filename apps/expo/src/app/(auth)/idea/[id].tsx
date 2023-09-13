@@ -1,4 +1,5 @@
 import { ScrollView, Text, View } from "react-native"
+import { SafeAreaView } from "react-native-safe-area-context"
 import { useGlobalSearchParams } from "expo-router"
 
 import { IdeaView, LoadingSpinner } from "~/components"
@@ -11,18 +12,20 @@ export default function Idea() {
   const { data, isLoading, isError } = api.ideas.byId.useQuery({ id })
 
   return (
-    <ScrollView className="bg-white py-10">
+    <SafeAreaView className="h-full w-full bg-white pt-2">
       {isLoading && (
-        <View className="flex h-48 w-full items-center justify-center">
+        <View className="fixed z-10 flex h-screen w-screen items-center justify-center bg-white">
           <LoadingSpinner />
         </View>
       )}
-      {((!isLoading && !data) || isError) && (
-        <View>
-          <Text className="p-4 text-center text-2xl">Coś poszło nie tak 😢</Text>
-        </View>
-      )}
-      {data && <IdeaView idea={data} />}
-    </ScrollView>
+      <ScrollView>
+        {((!isLoading && !data) || isError) && (
+          <View>
+            <Text className="p-4 text-center text-2xl">Coś poszło nie tak 😢</Text>
+          </View>
+        )}
+        {data && <IdeaView idea={data} />}
+      </ScrollView>
+    </SafeAreaView>
   )
 }

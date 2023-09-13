@@ -1,4 +1,5 @@
 import { Pressable, Text, TouchableOpacity, View } from "react-native"
+import Animated, { BounceIn, FadeOut } from "react-native-reanimated"
 import { Link } from "expo-router"
 import { MaterialIcons } from "@expo/vector-icons"
 import type { inferRouterOutputs } from "@trpc/server"
@@ -36,7 +37,9 @@ export const IdeaListItem: React.FC<IdeaListItemProps> = ({ item, favourite, unf
           onPress={() => (item.favoritedByMe ? unfavourite() : favourite())}
         >
           {item.favoritedByMe ? (
-            <MaterialIcons name="favorite" size={24} color="red" />
+            <Animated.View entering={BounceIn} exiting={FadeOut}>
+              <MaterialIcons name="favorite" size={24} color="red" />
+            </Animated.View>
           ) : (
             <MaterialIcons name="favorite-border" size={24} color={colors.primary} />
           )}

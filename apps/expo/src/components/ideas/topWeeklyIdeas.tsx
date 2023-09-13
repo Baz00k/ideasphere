@@ -117,8 +117,8 @@ export const TopWeeklyIdeas = forwardRef<TopWeeklyIdeasRef>(function TopWeeklyId
   }, [data])
 
   return (
-    <View className="min-h-full w-full">
-      <Text className="mb-6 mt-2 text-center font-comfortaa_400 text-2xl text-primary">
+    <View className="w-full">
+      <Text className="mb-6 mt-2 text-center font-comfortaa_400 text-xl text-primary">
         Najpopularniejsze w tym tygodniu
       </Text>
       {isLoading && <LoadingSpinner />}

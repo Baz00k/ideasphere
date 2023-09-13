@@ -11,7 +11,7 @@ export default function Idea() {
   const { data, isLoading, isError } = api.ideas.byId.useQuery({ id })
 
   return (
-    <ScrollView className="w-full bg-white">
+    <ScrollView className="bg-white py-10">
       {isLoading && (
         <View className="flex h-48 w-full items-center justify-center">
           <LoadingSpinner />

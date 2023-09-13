@@ -22,6 +22,7 @@ export default function Layout() {
             height: 40,
           },
         }}
+        backBehavior="history"
       >
         <Tabs.Screen
           name="home"
@@ -45,6 +46,7 @@ export default function Layout() {
             tabBarIcon: ({ size, focused }) => (
               <TabBarIcon name="person" size={size} focused={focused} />
             ),
+            headerShown: false,
           }}
         />
         <Tabs.Screen

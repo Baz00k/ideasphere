@@ -116,4 +116,47 @@ export const ideasRouter = createTRPCRouter({
       },
     })
   }),
+
+  myFavouriteIdeas: protectedProcedure.query(async ({ ctx }) => {
+    const ideas = await ctx.db.idea.findMany({
+      where: {
+        favoritedBy: {
+          some: {
+            userId: ctx.user.id,
+          },
+        },
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+      select: {
+        id: true,
+        title: true,
+        description: true,
+        favoritedBy: {
+          where: {
+            userId: ctx.user.id,
+          },
+          select: {
+            _count: {
+              select: {
+                favoritedIdeas: true,
+              },
+            },
+          },
+        },
+        _count: {
+          select: {
+            favoritedBy: true,
+          },
+        },
+      },
+    })
+
+    return ideas.map((idea) => ({
+      ...idea,
+      description: idea.description.slice(0, 100),
+      favoritedByMe: idea.favoritedBy.length > 0,
+    }))
+  }),
 })

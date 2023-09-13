@@ -4,6 +4,7 @@ import { MaterialIcons } from "@expo/vector-icons"
 import type { inferRouterOutputs } from "@trpc/server"
 
 import type { AppRouter } from "@ideasphere/api"
+import { colors } from "@ideasphere/tailwind-config/themeColors"
 
 interface IdeaListItemProps {
   item: inferRouterOutputs<AppRouter>["ideas"]["weeklyTopIdeas"][number]
@@ -26,7 +27,7 @@ export const IdeaListItem: React.FC<IdeaListItemProps> = ({ item, favourite, unf
       >
         <View className="flex-column ml-2 flex w-4/5 flex-shrink">
           <Text className="font-conmfortaa_700 text-xl">{item.title}</Text>
-          <Text className="line-clamp-1  max-h-4 text-ellipsis font-comfortaa_300">
+          <Text className="text-ellipsis font-comfortaa_300" numberOfLines={1}>
             {item.description}
           </Text>
         </View>
@@ -37,9 +38,16 @@ export const IdeaListItem: React.FC<IdeaListItemProps> = ({ item, favourite, unf
           {item.favoritedByMe ? (
             <MaterialIcons name="favorite" size={24} color="red" />
           ) : (
-            <MaterialIcons name="favorite-border" size={24} color="black" />
+            <MaterialIcons name="favorite-border" size={24} color={colors.primary} />
           )}
-          <Text className="text-center">{item._count.favoritedBy}</Text>
+          <Text className="text-center">
+            {item._count.favoritedBy.toLocaleString("pl", {
+              minimumFractionDigits: 0,
+              maximumFractionDigits: 0,
+              notation: "compact",
+              compactDisplay: "short",
+            })}
+          </Text>
         </Pressable>
       </TouchableOpacity>
     </Link>

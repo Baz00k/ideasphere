@@ -62,7 +62,7 @@ const TopActionsArr: TopAction[] = [
 
 const TopActions: React.FC = () => {
   return (
-    <View className="my-4 flex w-full flex-row justify-between">
+    <View className="my-4 flex w-full flex-row items-start justify-between">
       {TopActionsArr.map((action) => (
         <View key={action.label} className="m-2 flex w-1/5 flex-col justify-center gap-y-2">
           <View className="flex aspect-square w-full items-center justify-center rounded-full border-2 border-primary bg-gray-50">

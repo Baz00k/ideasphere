@@ -24,7 +24,7 @@ const RootLayout = () => {
                 animation: segments.length > 1 ? "default" : "fade",
               }}
             />
-            <StatusBar style="dark" animated />
+            <StatusBar style="dark" translucent animated />
           </SafeAreaProvider>
         </TRPCProvider>
       </AssetsLoader>

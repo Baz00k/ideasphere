@@ -19,7 +19,7 @@ const defineConfig = (): ExpoConfig => ({
   icon: "./assets/ideasphere_icon.png",
   userInterfaceStyle: "automatic",
   splash: {
-    image: "./assets/ideasphere_splash.png",
+    image: "./assets/ideasphere_splash.jpg",
     backgroundColor: "#FFFFFF",
     resizeMode: "contain",
   },
@@ -30,12 +30,12 @@ const defineConfig = (): ExpoConfig => ({
   ios: {
     supportsTablet: true,
     bundleIdentifier: "dev.buzuk.ideasphere.app",
-    icon: "./assets/ideasphere_icon.png",
+    icon: "./assets/appIcons/ios.png",
   },
   android: {
     package: "dev.buzuk.ideasphere.app",
     adaptiveIcon: {
-      foregroundImage: "./assets/ideasphere_icon.png",
+      foregroundImage: "./assets/appIcons/android.png",
       backgroundColor: "#FFFFFF",
     },
     softwareKeyboardLayoutMode: "resize",

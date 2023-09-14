@@ -26,12 +26,12 @@ export default function SigninPage() {
   }
 
   return (
-    <main className="flex h-screen bg-primary/80">
-      <div className="mx-auto flex min-w-fit flex-col items-center justify-center gap-6">
-        <h1 className="text-3xl font-bold">Sign In</h1>
+    <main className="flex h-screen bg-gradient-to-b from-secondary to-primary text-white">
+      <div className="mx-auto flex min-w-fit flex-col items-center justify-center gap-6 text-white">
+        <h1 className="font-comfortaa_next text-3xl font-bold">Logowanie</h1>
         <div className="flex w-full flex-col gap-6">
           <input
-            className="rounded-lg bg-white/50 px-4 py-1  transition hover:bg-white/60"
+            className="rounded-lg bg-white/10 px-4 py-1  transition hover:bg-white/20"
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -39,11 +39,11 @@ export default function SigninPage() {
           />
           <div className="relative">
             <input
-              className="w-full rounded-lg bg-white/50 px-4 py-1 transition hover:bg-white/60"
+              className="w-full rounded-lg bg-white/10 px-4 py-1 transition hover:bg-white/20"
               type={showPassword ? "text" : "password"}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="Password"
+              placeholder="Hasło"
             />
             <button
               className="absolute bottom-0 right-0 top-0 flex items-center justify-center px-2"
@@ -56,7 +56,7 @@ export default function SigninPage() {
             className="w-full rounded-lg bg-secondary py-2 font-semibold text-white no-underline transition hover:bg-secondary/90"
             onClick={signInWithPassword}
           >
-            Sign In
+            Zaloguj się
           </button>
         </div>
       </div>

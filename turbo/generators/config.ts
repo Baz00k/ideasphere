@@ -1,5 +1,5 @@
-import { execSync } from "node:child_process";
-import type { PackageJson, PlopTypes } from "@turbo/gen";
+import { execSync } from "node:child_process"
+import type { PlopTypes } from "@turbo/gen"
 
 export default function generator(plop: PlopTypes.NodePlopAPI): void {
   plop.setGenerator("init", {
@@ -8,24 +8,22 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
       {
         type: "input",
         name: "name",
-        message:
-          "What is the name of the package? (You can skip the `@ideasphere/` prefix)",
+        message: "What is the name of the package? (You can skip the `@ideasphere/` prefix)",
       },
       {
         type: "input",
         name: "deps",
-        message:
-          "Enter a space separated list of dependencies you would like to install",
+        message: "Enter a space separated list of dependencies you would like to install",
       },
     ],
     actions: [
-      (answers: { name: string }) => {
+      (answers) => {
         if ("name" in answers && typeof answers.name === "string") {
           if (answers.name.startsWith("@ideasphere/")) {
-            answers.name = answers.name.replace("@ideasphere/", "");
+            answers.name = answers.name.replace("@ideasphere/", "")
           }
         }
-        return "Config sanitized";
+        return "Config sanitized"
       },
       {
         type: "add",
@@ -52,36 +50,32 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
         path: "packages/{{ name }}/package.json",
         async transform(content: string, answers: { deps: string }) {
           if ("deps" in answers && typeof answers.deps === "string") {
-            const pkg = JSON.parse(content) as PackageJson;
+            const pkg = JSON.parse(content) as { dependencies?: Record<string, string> }
             for (const dep of answers.deps.split(" ").filter(Boolean)) {
-              const version = await fetch(
-                `https://registry.npmjs.org/-/package/${dep}/dist-tags`,
-              )
+              const version = await fetch(`https://registry.npmjs.org/-/package/${dep}/dist-tags`)
                 .then((res) => res.json())
-                .then((json) => json.latest);
-              if (!pkg.dependencies) pkg.dependencies = {};
-              pkg.dependencies[dep] = `^${version}`;
+                .then((json) => json.latest)
+              if (!pkg.dependencies) pkg.dependencies = {}
+              pkg.dependencies[dep] = `^${version}`
             }
-            return JSON.stringify(pkg, null, 2);
+            return JSON.stringify(pkg, null, 2)
           }
-          return content;
+          return content
         },
       },
-      async (answers: { name: any }) => {
+      async (answers) => {
         /**
          * Install deps and format everything
          */
         if ("name" in answers && typeof answers.name === "string") {
           execSync("pnpm manypkg fix", {
             stdio: "inherit",
-          });
-          execSync(
-            `pnpm prettier --write packages/${answers.name}/** --list-different`,
-          );
-          return "Package scaffolded";
+          })
+          execSync(`pnpm prettier --write packages/${answers.name}/** --list-different`)
+          return "Package scaffolded"
         }
-        return "Package not scaffolded";
+        return "Package not scaffolded"
       },
     ],
-  });
+  })
 }

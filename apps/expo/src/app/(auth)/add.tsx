@@ -1,6 +1,5 @@
 import { useState } from "react"
-import { Text } from "react-native"
-import { SafeAreaView } from "react-native-safe-area-context"
+import { ScrollView, Text, View } from "react-native"
 
 import { Button, Input } from "~/components"
 import { api } from "~/utils/api"
@@ -20,30 +19,31 @@ const Add: React.FC = () => {
   })
 
   return (
-    <SafeAreaView className="flex h-full w-full items-center bg-white text-center">
-      <Text className="mb-12 mt-4 text-3xl font-bold">Dodaj nowe atrakcje</Text>
-      <Input
-        className="mx-8 my-2 w-full bg-gray-50"
-        placeholder="Tytuł"
-        value={title}
-        onChangeText={setTitle}
-      />
-      <Input
-        className="mx-8 my-2 w-full bg-gray-50"
-        placeholder="Opis"
-        value={description}
-        onChangeText={setDescription}
-      />
-      <Button
-        className="m-4 w-48"
-        onPress={() => mutate({ title, description, published: true })}
-        loading={isLoading}
-      >
-        <Text>Dodaj</Text>
-      </Button>
-
-      {error && <Text className="text-center text-lg text-red-500">{error.message}</Text>}
-    </SafeAreaView>
+    <ScrollView className="bg-white p-4">
+      <View className="flex w-full flex-col items-center gap-y-4">
+        <Text className="mb-4 w-full font-conmfortaa_700 text-2xl">Dodaj nowe atrakcje</Text>
+        <Input
+          className="mx-8 my-2 w-full bg-gray-50"
+          placeholder="Tytuł"
+          value={title}
+          onChangeText={setTitle}
+        />
+        <Input
+          className="mx-8 my-2 h-24 max-h-48 w-full bg-gray-50"
+          placeholder="Opis"
+          value={description}
+          onChangeText={setDescription}
+          multiline
+        />
+        <Button
+          className="m-4 w-48"
+          onPress={() => mutate({ title, description, published: true })}
+          loading={isLoading}
+        >
+          <Text>Dodaj</Text>
+        </Button>
+      </View>
+    </ScrollView>
   )
 }
 

@@ -56,7 +56,7 @@ const Login: React.FC = () => {
       <Text className="mb-12 mt-auto text-center font-comfortaa_400 text-4xl text-secondary">
         Zaloguj się
       </Text>
-      <View className="flex w-10/12 flex-col gap-y-8">
+      <View className="flex w-full max-w-xs flex-col gap-y-1">
         <Input
           value={email}
           onChangeText={(text) => setEmail(text)}
@@ -64,6 +64,8 @@ const Login: React.FC = () => {
           textContentType="emailAddress"
           keyboardType="email-address"
           autoCapitalize="none"
+          roundness="3xl"
+          className="text-center"
         />
         <Input
           value={password}
@@ -72,6 +74,8 @@ const Login: React.FC = () => {
           textContentType="password"
           secureTextEntry
           autoCapitalize="none"
+          roundness="3xl"
+          className="text-center"
         />
         {false && ( // TODO: Uncomment when social auth is implemented
           <View className="mx-auto flex w-52 flex-col gap-y-4">
@@ -102,6 +106,7 @@ const Login: React.FC = () => {
           type="outline"
           color="secondary"
           loading={loading}
+          disabled={!email || !password}
         />
       </View>
       <View className="mb-2 mt-auto flex flex-row justify-center pt-4">

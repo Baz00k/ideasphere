@@ -16,6 +16,7 @@ const SignUp: React.FC = () => {
     mutate: createUser,
     isLoading,
     data,
+    error,
   } = api.auth.createUser.useMutation({
     onSuccess() {
       setUsername("")
@@ -34,6 +35,11 @@ const SignUp: React.FC = () => {
     void verifyEmail(data)
   }, [data])
 
+  useEffect(() => {
+    if (error?.data?.code !== "BAD_REQUEST" || !error?.message) return
+    Alert.alert("Błąd rejestracji", error.message)
+  }, [error])
+
   const verifyEmail = async (url: string) => {
     await openURL(url)
   }
@@ -48,17 +54,20 @@ const SignUp: React.FC = () => {
         className="flex w-full flex-col px-4"
         contentContainerStyle={{ justifyContent: "center", flexGrow: 1 }}
       >
-        <View className="w-full">
+        <View className="mt-auto w-full">
           <Text className="mb-12 text-center font-comfortaa_400 text-4xl text-secondary">
             Rejestracja
           </Text>
-          <View className="mx-auto flex w-full max-w-xs gap-y-8">
+          <View className="mx-auto flex w-full max-w-xs gap-y-1">
             <Input
               value={username}
               onChangeText={(text) => setUsername(text)}
               placeholder="Nazwa użytkownika"
               textContentType="username"
               autoCapitalize="none"
+              roundness="3xl"
+              className="text-center"
+              error={error?.data?.zodError?.fieldErrors?.username}
             />
             <Input
               value={email}
@@ -67,6 +76,9 @@ const SignUp: React.FC = () => {
               textContentType="emailAddress"
               keyboardType="email-address"
               autoCapitalize="none"
+              roundness="3xl"
+              className="text-center"
+              error={error?.data?.zodError?.fieldErrors?.email}
             />
             <Input
               value={password}
@@ -75,6 +87,9 @@ const SignUp: React.FC = () => {
               textContentType="password"
               secureTextEntry
               autoCapitalize="none"
+              roundness="3xl"
+              className="text-center"
+              error={error?.data?.zodError?.fieldErrors?.password}
             />
             <Input
               value={passwordConfirmation}
@@ -83,6 +98,9 @@ const SignUp: React.FC = () => {
               textContentType="password"
               secureTextEntry
               autoCapitalize="none"
+              roundness="3xl"
+              className="text-center"
+              error={error?.data?.zodError?.fieldErrors?.passwordConfirmation}
             />
             <Button
               className="w-48 self-center"
@@ -91,6 +109,7 @@ const SignUp: React.FC = () => {
               loading={isLoading}
               color="secondary"
               type="outline"
+              disabled={!username || !email || !password || !passwordConfirmation}
             />
           </View>
         </View>

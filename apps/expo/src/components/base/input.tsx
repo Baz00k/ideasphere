@@ -5,7 +5,7 @@ import type { VariantProps } from "tailwind-variants"
 
 const inputVariants = tv({
   slots: {
-    wrapper: "flex flex-col",
+    wrapper: "flex flex-col w-full",
     input: "w-full mb-2",
     error: "text-red-500 text-sm mb-3 px-2",
   },

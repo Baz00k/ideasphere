@@ -2,7 +2,7 @@ import { useState } from "react"
 import { Text, View } from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context"
 
-import { Button, FavouriteIdeas, LoadingSpinner } from "~/components"
+import { Button, LoadingSpinner } from "~/components"
 import { api } from "~/utils/api"
 import { signOut } from "~/utils/auth"
 
@@ -31,7 +31,7 @@ const Profile: React.FC = () => {
           <LoadingSpinner />
         </View>
       )}
-      <View className="flex flex-col">
+      <View className="flex grow flex-col">
         <View className="mb-8 flex w-full flex-col items-center gap-y-4">
           <View className="flex w-full items-center">
             <View className="flex aspect-square w-28 items-center justify-center rounded-full bg-gray-100">
@@ -44,7 +44,6 @@ const Profile: React.FC = () => {
             {data?.username ? `@${data.username}` : "username"}
           </Text>
         </View>
-        <FavouriteIdeas />
         <Button
           onPress={handleSignOut}
           text="Wyloguj"

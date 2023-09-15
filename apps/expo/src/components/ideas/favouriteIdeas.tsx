@@ -13,7 +13,11 @@ const FavouriteIdeas: React.FC = () => {
       <Text className="text-center font-comfortaa_400 text-xl text-primary">
         Polubione przez Ciebie
       </Text>
-      {isLoading && <LoadingSpinner />}
+      {isLoading && (
+        <View className="py-8">
+          <LoadingSpinner />
+        </View>
+      )}
       <View className="h-full w-full">
         <FlashList
           data={data}
@@ -30,7 +34,7 @@ const FavouriteIdeas: React.FC = () => {
               asChild
             >
               <TouchableOpacity
-                className="mx-auto my-2 flex h-24 w-36 items-center justify-center rounded-xl bg-secondary"
+                className="mx-auto my-2 flex h-24 w-11/12 items-center justify-center overflow-hidden rounded-xl bg-secondary"
                 activeOpacity={0.8}
               >
                 <Text className="font-comfortaa_400">{item.title}</Text>

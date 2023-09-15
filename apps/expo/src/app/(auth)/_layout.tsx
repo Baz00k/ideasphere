@@ -34,10 +34,26 @@ export default function Layout() {
           }}
         />
         <Tabs.Screen
+          name="search"
+          options={{
+            tabBarIcon: ({ size, focused }) => (
+              <TabBarIcon name="search" size={size} focused={focused} />
+            ),
+          }}
+        />
+        <Tabs.Screen
           name="add"
           options={{
             tabBarIcon: ({ size, focused }) => (
-              <TabBarIcon name="add-box" size={size * 1.5} focused={focused} />
+              <TabBarIcon name="add-circle" size={size * 1.6} focused={focused} />
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="favorites"
+          options={{
+            tabBarIcon: ({ size, focused }) => (
+              <TabBarIcon name="favorite" size={size} focused={focused} />
             ),
           }}
         />

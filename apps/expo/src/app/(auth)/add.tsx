@@ -10,7 +10,7 @@ const Add: React.FC = () => {
 
   const context = api.useContext()
 
-  const { mutate, error, isLoading } = api.ideas.create.useMutation({
+  const { mutate, isLoading, error } = api.ideas.create.useMutation({
     async onSuccess() {
       setTitle("")
       setDescription("")
@@ -20,28 +20,31 @@ const Add: React.FC = () => {
 
   return (
     <ScrollView className="bg-white p-4">
-      <View className="flex w-full flex-col items-center gap-y-4">
+      <View className="flex w-full flex-col items-center gap-y-2">
         <Text className="mb-4 w-full font-conmfortaa_700 text-2xl">Dodaj nowe atrakcje</Text>
         <Input
-          className="mx-8 my-2 w-full bg-gray-50"
+          className="bg-gray-100"
           placeholder="Tytuł"
           value={title}
           onChangeText={setTitle}
+          error={error?.data?.zodError?.fieldErrors?.title}
         />
         <Input
-          className="mx-8 my-2 h-24 max-h-48 w-full bg-gray-50"
+          className="h-32 bg-gray-100"
           placeholder="Opis"
           value={description}
           onChangeText={setDescription}
           multiline
+          textAlignVertical="top"
+          error={error?.data?.zodError?.fieldErrors?.description}
         />
         <Button
-          className="m-4 w-48"
           onPress={() => mutate({ title, description, published: true })}
+          text="Dodaj"
           loading={isLoading}
-        >
-          <Text>Dodaj</Text>
-        </Button>
+          className="w-48"
+          disabled={!title || !description}
+        />
       </View>
     </ScrollView>
   )

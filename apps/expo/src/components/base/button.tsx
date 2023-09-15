@@ -1,5 +1,5 @@
-import { ActivityIndicator, Pressable, Text, View } from "react-native"
-import type { PressableProps } from "react-native"
+import { ActivityIndicator, Text, TouchableOpacity, View } from "react-native"
+import type { TouchableOpacityProps } from "react-native"
 import { twMerge } from "tailwind-merge"
 import { tv } from "tailwind-variants"
 import type { VariantProps } from "tailwind-variants"
@@ -124,7 +124,7 @@ const buttonVariants = tv({
   ],
 })
 
-interface ButtonProps extends PressableProps, VariantProps<typeof buttonVariants> {
+interface ButtonProps extends TouchableOpacityProps, VariantProps<typeof buttonVariants> {
   text?: string
   textClassName?: string
   loading?: boolean
@@ -151,7 +151,12 @@ export const Button: React.FC<ButtonProps> = ({
   } = buttonVariants({ color, type, size, roundness, loading })
 
   return (
-    <Pressable {...props} className={base()} disabled={disabled ?? loading}>
+    <TouchableOpacity
+      {...props}
+      className={base()}
+      disabled={disabled ?? loading}
+      activeOpacity={0.8}
+    >
       {loading && (
         <View className={loader()}>
           <ActivityIndicator
@@ -161,8 +166,8 @@ export const Button: React.FC<ButtonProps> = ({
         </View>
       )}
       {text && <Text className={twMerge(textClasses(), textClassName)}>{text}</Text>}
-      {typeof children === "function" ? children({ pressed: false }) : children}
-    </Pressable>
+      {children}
+    </TouchableOpacity>
   )
 }
 

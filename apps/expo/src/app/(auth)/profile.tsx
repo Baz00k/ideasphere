@@ -45,7 +45,13 @@ const Profile: React.FC = () => {
           </Text>
         </View>
         <FavouriteIdeas />
-        <Button onPress={handleSignOut} text="Wyloguj" loading={loading} className="mb-4 mt-auto" />
+        <Button
+          onPress={handleSignOut}
+          text="Wyloguj"
+          loading={loading}
+          type="outline"
+          className="mb-4 mt-auto"
+        />
       </View>
     </SafeAreaView>
   )

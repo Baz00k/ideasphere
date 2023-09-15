@@ -53,7 +53,7 @@ const Login: React.FC = () => {
 
   return (
     <>
-      <Text className="mx-auto mb-12 mt-auto font-comfortaa_400 text-4xl text-secondary">
+      <Text className="mb-12 mt-auto text-center font-comfortaa_400 text-4xl text-secondary">
         Zaloguj się
       </Text>
       <View className="flex w-10/12 flex-col gap-y-8">
@@ -96,9 +96,11 @@ const Login: React.FC = () => {
           </View>
         )}
         <Button
-          className="self-center"
+          className="w-48 self-center"
           onPress={handleLogin}
           text="Zaloguj się"
+          type="outline"
+          color="secondary"
           loading={loading}
         />
       </View>

@@ -20,12 +20,20 @@ export const authRouter = createTRPCRouter({
     .input(
       z.object({
         email: z.string().email(),
-        password: z.string().min(8).max(72),
         username: z.string().min(3).max(32),
+        password: z.string().min(8).max(72),
+        passwordConfirmation: z.string().min(8).max(72),
         redirectUrl: z.string().url().optional(),
       }),
     )
     .mutation(async ({ ctx, input }) => {
+      if (input.password !== input.passwordConfirmation) {
+        throw new TRPCError({
+          code: "BAD_REQUEST",
+          message: "Passwords do not match",
+        })
+      }
+
       const existingUser = await ctx.db.profile.findUnique({
         where: {
           email: input.email,
@@ -44,7 +52,7 @@ export const authRouter = createTRPCRouter({
         email: input.email,
         password: input.password,
         options: {
-          redirectTo: input.redirectUrl,
+          redirectTo: input.redirectUrl ?? process.env.VERCEL_URL ?? process.env.BASE_URL,
         },
       })
 

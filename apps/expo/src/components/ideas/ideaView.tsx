@@ -11,19 +11,21 @@ interface IdeaViewProps {
 const IdeaView: React.FC<IdeaViewProps> = ({ idea }) => {
   return (
     <View className="flex flex-col gap-y-4">
-      <View className="flex w-full flex-row flex-wrap justify-between px-4 pt-4">
-        <Text className="font-comfortaa_400 text-3xl text-primary">{idea.title}</Text>
-        <View className="flex flex-shrink flex-row items-center gap-x-2">
-          <MaterialIcons name="favorite" size={24} color="red" />
-          <Text className="font-comfortaa_300 text-sm">
-            {idea._count.favoritedBy.toLocaleString("pl", {
-              minimumFractionDigits: 0,
-              maximumFractionDigits: 0,
-              notation: "compact",
-              compactDisplay: "short",
-            })}{" "}
-            polubień
-          </Text>
+      <View>
+        <View className="flex w-full flex-row flex-wrap justify-between gap-2 px-4 pt-4">
+          <Text className="font-comfortaa_400 text-3xl text-primary">{idea.title}</Text>
+          <View className="flex flex-shrink flex-row items-center gap-x-2">
+            <MaterialIcons name="favorite" size={24} color="red" />
+            <Text className="font-comfortaa_300 text-sm">
+              {idea._count.favoritedBy.toLocaleString("pl", {
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0,
+                notation: "compact",
+                compactDisplay: "short",
+              })}{" "}
+              polubień
+            </Text>
+          </View>
         </View>
       </View>
 

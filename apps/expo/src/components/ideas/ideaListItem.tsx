@@ -28,8 +28,10 @@ export const IdeaListItem: React.FC<IdeaListItemProps> = ({ item, favourite, unf
         activeOpacity={0.8}
       >
         <View className="flex-column ml-2 flex w-4/5 flex-shrink">
-          <Text className="font-conmfortaa_700 text-xl">{item.title}</Text>
-          <Text className="text-ellipsis font-comfortaa_300" numberOfLines={1}>
+          <Text className="font-conmfortaa_700 text-xl" numberOfLines={1}>
+            {item.title}
+          </Text>
+          <Text className="font-comfortaa_300" numberOfLines={1}>
             {item.description}
           </Text>
         </View>

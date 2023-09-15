@@ -39,9 +39,13 @@ const buttonVariants = tv({
         base: "px-8 py-4",
         text: "text-xl",
       },
-      xxl: {
+      "2xl": {
         base: "px-10 py-5",
         text: "text-2xl",
+      },
+      "3xl": {
+        base: "px-12 py-6",
+        text: "text-3xl",
       },
     },
     type: {

@@ -5683,7 +5683,7 @@ packages:
     peerDependencies:
       expo: '*'
     dependencies:
-      expo: 49.0.9(@babel/core@7.22.17)
+      expo: 49.0.9(@babel/core@7.22.19)
     dev: false
 
   /expo-image-picker@14.3.2(expo@49.0.9):
@@ -5691,7 +5691,7 @@ packages:
     peerDependencies:
       expo: '*'
     dependencies:
-      expo: 49.0.9(@babel/core@7.22.17)
+      expo: 49.0.9(@babel/core@7.22.19)
       expo-image-loader: 4.3.0(expo@49.0.9)
     dev: false
 

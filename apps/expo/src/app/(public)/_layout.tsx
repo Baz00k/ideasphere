@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Image, Keyboard, Pressable, Text, TouchableWithoutFeedback, View } from "react-native"
+import { Keyboard, Pressable, Text, TouchableWithoutFeedback, View } from "react-native"
 import { PanGestureHandler } from "react-native-gesture-handler"
 import Animated, {
   FadeIn,
@@ -9,6 +9,7 @@ import Animated, {
   SlideOutDown,
 } from "react-native-reanimated"
 import { SafeAreaView } from "react-native-safe-area-context"
+import { Image } from "expo-image"
 import { Slot } from "expo-router"
 import Logo from "assets/ideasphere_logo.png"
 

@@ -71,9 +71,6 @@ importers:
       expo-crypto:
         specifier: ^12.4.1
         version: 12.4.1(expo@49.0.9)
-      expo-file-system:
-        specifier: ~15.4.4
-        version: 15.4.4(expo@49.0.9)
       expo-font:
         specifier: ~11.4.0
         version: 11.4.0(expo@49.0.9)
@@ -98,6 +95,9 @@ importers:
       expo-status-bar:
         specifier: ~1.6.0
         version: 1.6.0
+      lodash:
+        specifier: ^4.17.21
+        version: 4.17.21
       nativewind:
         specifier: ^2.0.11
         version: 2.0.11(react@18.2.0)(tailwindcss@3.3.2)
@@ -165,6 +165,9 @@ importers:
       '@types/babel__core':
         specifier: ^7.20.2
         version: 7.20.2
+      '@types/lodash':
+        specifier: ^4.14.198
+        version: 4.14.198
       '@types/react':
         specifier: ^18.2.21
         version: 18.2.21
@@ -3436,6 +3439,10 @@ packages:
     dependencies:
       '@types/node': 18.17.15
     dev: false
+
+  /@types/lodash@4.14.198:
+    resolution: {integrity: sha512-trNJ/vtMZYMLhfN45uLq4ShQSw0/S7xCTLLVM+WM1rmFpba/VS42jVUgaO3w/NOLiWR/09lnYk0yMaA/atdIsg==}
+    dev: true
 
   /@types/minimatch@5.1.2:
     resolution: {integrity: sha512-K0VQKziLUWkVKiRVrx4a40iPaxTUefQmjtkQofBkYRcoaaL/8rhwDWww9qWbrgicNOgnpIsMxyNIUM4+n6dUIA==}

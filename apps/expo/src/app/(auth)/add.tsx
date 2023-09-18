@@ -1,73 +1,128 @@
 import { useState } from "react"
-import { Image, ScrollView, Text, View } from "react-native"
-import * as FileSystem from "expo-file-system"
+import { ScrollView, Text, View } from "react-native"
+import { Image } from "expo-image"
 import * as ImagePicker from "expo-image-picker"
 import { PermissionStatus } from "expo-image-picker"
+import type { ImagePickerAsset } from "expo-image-picker"
 import { FlashList } from "@shopify/flash-list"
 
 import { Button, Input } from "~/components"
 import { api } from "~/utils/api"
 import { supabase } from "~/utils/auth"
 
-interface Image {
-  base64: string
-  aspectRatio: number
-}
+const SUPABASE_IMAGES_BUCKET = "idea_photos" as const
 
 const Add: React.FC = () => {
   const [title, setTitle] = useState("")
   const [description, setDescription] = useState("")
-  const [base64Images, setBase64Images] = useState<Image[]>([])
-  console.log(base64Images.map((image) => image.aspectRatio))
+  const [images, setImages] = useState<ImagePickerAsset[]>([])
+  const [isLoading, setIsLoading] = useState(false)
 
   const context = api.useContext()
 
-  const { mutate, isLoading, error } = api.ideas.create.useMutation({
+  const {
+    isLoading: isMutationLoading,
+    error: mutationError,
+    mutateAsync,
+  } = api.ideas.createOrUpdate.useMutation({
     async onSuccess() {
-      setTitle("")
-      setDescription("")
       await context.ideas.invalidate()
     },
   })
 
   const selectImages = async () => {
-    const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync()
-    if (status !== PermissionStatus.GRANTED) {
-      alert("Sorry, we need camera roll permissions to make this work!")
-      return
+    try {
+      const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync()
+      if (status !== PermissionStatus.GRANTED) {
+        alert("Musisz zezwolić na dostęp do galerii, aby móc dodać zdjęcia")
+        return
+      }
+
+      const result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        quality: 0.8,
+        allowsMultipleSelection: true,
+        exif: false,
+        base64: true,
+        selectionLimit: 10,
+      })
+
+      if (!result.canceled) {
+        setImages(result.assets)
+      }
+    } catch (error) {
+      alert("Wystąpił błąd podczas dodawania zdjęć")
     }
+  }
 
-    const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      quality: 0.8,
-      allowsMultipleSelection: true,
-      exif: false,
-      base64: true,
-      selectionLimit: 10,
-    })
+  const createIdea = async () => {
+    try {
+      setIsLoading(true)
 
-    if (!result.canceled) {
-      setBase64Images(
-        result?.assets?.map((image) => {
-          return {
-            base64: `data:image/jpeg;base64,${image.base64}`,
-            aspectRatio: image.width / image.height,
-          }
-        }) ?? [],
-      )
+      const { id } = await mutateAsync({
+        title,
+        description,
+        published: !(images.length > 0),
+      })
+
+      if (images.length === 0) return
+
+      const promises = images.map((image) => {
+        const fileType = "image/png"
+
+        const base64 = image.base64!
+        const imageBlob = new Blob([base64], { type: fileType })
+
+        const fileName = (image.assetId ?? image.fileName ?? new Date().getTime())
+          .toString()
+          .replaceAll(/[:/\\]/g, "-")
+        const file = new File([imageBlob], fileName, { type: fileType })
+
+        return supabase.storage.from(SUPABASE_IMAGES_BUCKET).upload(`${id}/${fileName}`, file, {
+          contentType: fileType,
+        })
+      })
+
+      const results = await Promise.all(promises)
+
+      results.forEach((result) => {
+        if (result.error) {
+          throw result.error
+        }
+      })
+
+      await mutateAsync({
+        id,
+        title,
+        description,
+        published: true,
+        images: results.map((result) => result.data!.path),
+      })
+
+      setImages([])
+    } catch (error) {
+      console.error(error)
+      alert("Wystąpił błąd podczas dodawania atrakcji")
+    } finally {
+      setTitle("")
+      setDescription("")
+      setIsLoading(false)
+      alert("Atrakcja została dodana")
     }
   }
 
   return (
     <ScrollView className="h-full bg-white">
       <View className="flex w-full flex-col items-center gap-y-2 p-4">
-        <Text className="mb-4 w-full font-conmfortaa_700 text-2xl">Dodaj nowe atrakcje</Text>
+        <Text className="mb-4 w-full text-center font-comfortaa_400 text-2xl">
+          Dodaj nowe atrakcje
+        </Text>
         <Input
           className="bg-gray-100"
           placeholder="Tytuł"
           value={title}
           onChangeText={setTitle}
-          error={error?.data?.zodError?.fieldErrors?.title}
+          error={mutationError?.data?.zodError?.fieldErrors?.title}
         />
         <Input
           className="h-32 bg-gray-100"
@@ -76,34 +131,44 @@ const Add: React.FC = () => {
           onChangeText={setDescription}
           multiline
           textAlignVertical="top"
-          error={error?.data?.zodError?.fieldErrors?.description}
+          error={mutationError?.data?.zodError?.fieldErrors?.description}
         />
-        <View className="h-48 w-full bg-red-200">
-          <FlashList
-            data={base64Images}
-            horizontal
-            renderItem={({ item }) => (
-              <Image source={{ uri: item.base64 }} className="aspect-auto h-48 object-contain" />
-            )}
-            ItemSeparatorComponent={() => <View className="w-4" />}
-            ListEmptyComponent={
-              <View className="flex h-full w-full flex-col items-center justify-center">
-                <Text className="text-xl text-gray-400">Brak zdjęć</Text>
-              </View>
-            }
-            bounces={false}
-            centerContent
-            showsHorizontalScrollIndicator
-            snapToAlignment="center"
-            estimatedItemSize={100}
+        {images.length > 0 && (
+          <View className="h-48 w-full">
+            <FlashList
+              data={images}
+              horizontal
+              renderItem={({ item }) => (
+                <Image
+                  source={{ uri: item.uri }}
+                  className="h-full rounded-md"
+                  style={{ aspectRatio: item.width / item.height }}
+                />
+              )}
+              ItemSeparatorComponent={() => <View className="w-4" />}
+              bounces={false}
+              showsHorizontalScrollIndicator={false}
+              centerContent
+              snapToAlignment="center"
+              estimatedItemSize={100}
+            />
+          </View>
+        )}
+        <View className="flex flex-row flex-wrap justify-center gap-x-4">
+          <Button
+            onPress={selectImages}
+            text={images.length > 0 ? "Zmień zdjęcia" : "Dodaj zdjęcia"}
+            type="outline"
           />
+          {images.length > 0 && (
+            <Button onPress={() => setImages([])} text="Usuń zdjęcia" type="outline" />
+          )}
         </View>
-        <Button onPress={selectImages} text="Dodaj zdjęcia" className="w-48" type="outline" />
       </View>
       <Button
-        onPress={() => mutate({ title, description, published: true })}
+        onPress={createIdea}
         text="Dodaj"
-        loading={isLoading}
+        loading={isLoading || isMutationLoading}
         className="mx-auto mb-4 mt-8 w-48"
         disabled={!title || !description}
       />

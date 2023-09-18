@@ -68,21 +68,111 @@ export const ideasRouter = createTRPCRouter({
     })
   }),
 
-  create: protectedProcedure
+  search: protectedProcedure
     .input(
       z.object({
+        query: z.string().max(100),
+        cursor: z.string().optional(),
+        limit: z.number().min(1).max(100).default(10),
+      }),
+    )
+    .query(async ({ ctx, input }) => {
+      const ideas = await ctx.db.idea.findMany({
+        where: {
+          published: true,
+          OR: [
+            {
+              title: {
+                contains: input.query,
+              },
+            },
+            {
+              description: {
+                contains: input.query,
+              },
+            },
+          ],
+        },
+        orderBy: {
+          createdAt: "desc",
+        },
+        select: {
+          id: true,
+          title: true,
+          description: true,
+          favoritedBy: {
+            where: {
+              userId: ctx.user.id,
+            },
+            select: {
+              _count: {
+                select: {
+                  favoritedIdeas: true,
+                },
+              },
+            },
+          },
+          _count: {
+            select: {
+              favoritedBy: true,
+            },
+          },
+        },
+        cursor: input.cursor ? { id: input.cursor } : undefined,
+        take: input.limit + 1,
+      })
+
+      const hasNextPage = ideas.length > input.limit
+
+      return {
+        ideas: ideas.slice(0, input.limit).map((idea) => ({
+          ...idea,
+          description: idea.description.slice(0, 100),
+          favoritedByMe: idea.favoritedBy.length > 0,
+        })),
+        nextPageCursor: hasNextPage ? ideas[ideas.length - 1]?.id : null,
+      }
+    }),
+
+  createOrUpdate: protectedProcedure
+    .input(
+      z.object({
+        id: z.string().optional(),
         title: z.string().min(3).max(100),
         description: z.string().min(3).max(1000),
         published: z.boolean().optional(),
+        images: z.array(z.string()).optional(),
       }),
     )
     .mutation(({ ctx, input }) => {
-      return ctx.db.idea.create({
-        data: {
+      if (!input.id) {
+        return ctx.db.idea.create({
+          data: {
+            title: input.title,
+            description: input.description,
+            published: input.published ?? false,
+            authorId: ctx.user.id,
+            images: input.images,
+          },
+        })
+      }
+
+      return ctx.db.idea.upsert({
+        where: {
+          id: input.id,
+        },
+        create: {
           title: input.title,
           description: input.description,
           published: input.published ?? false,
           authorId: ctx.user.id,
+          images: input.images,
+        },
+        update: {
+          title: input.title,
+          description: input.description,
+          published: input.published ?? false,
+          images: input.images,
         },
       })
     }),
@@ -133,6 +223,7 @@ export const ideasRouter = createTRPCRouter({
         id: true,
         title: true,
         description: true,
+        images: true,
         favoritedBy: {
           where: {
             userId: ctx.user.id,

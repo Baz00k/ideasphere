@@ -32,6 +32,7 @@ model Idea {
     authorId    String    @db.Uuid
     author      Profile   @relation(fields: [authorId], references: [userId], onDelete: Cascade)
     favoritedBy Profile[] @relation("FavoriteIdea")
+    images      String[]
 
     @@schema("public")
 }

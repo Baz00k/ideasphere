@@ -12,7 +12,7 @@ export default {
       comfortaa_next: ["var(--font-comfortaa)", "system-ui", "sans-serif"],
       comfortaa_300: "Comfortaa_300Light",
       comfortaa_400: "Comfortaa_400Regular",
-      conmfortaa_700: "Comfortaa_700Bold",
+      comfortaa_700: "Comfortaa_700Bold",
     },
   },
   plugins: [],

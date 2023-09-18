@@ -10,7 +10,7 @@ const FavouriteIdeas: React.FC = () => {
 
   return (
     <View className="mb-8 flex h-full w-full flex-col gap-y-4">
-      <Text className="text-center font-comfortaa_400 text-xl text-primary">
+      <Text className="text-center font-comfortaa_400 text-2xl text-primary">
         Polubione przez Ciebie
       </Text>
       {isLoading && (
@@ -34,10 +34,13 @@ const FavouriteIdeas: React.FC = () => {
               asChild
             >
               <TouchableOpacity
-                className="mx-auto my-2 flex h-24 w-11/12 items-center justify-center overflow-hidden rounded-xl bg-secondary"
+                className="mx-auto my-2 flex h-24 w-11/12 items-center justify-center overflow-hidden rounded-xl bg-secondary p-4"
                 activeOpacity={0.8}
               >
-                <Text className="font-comfortaa_400">{item.title}</Text>
+                {/* TODO: display image as background  */}
+                <Text className="font-comfortaa_400" numberOfLines={3}>
+                  {item.title}
+                </Text>
               </TouchableOpacity>
             </Link>
           )}

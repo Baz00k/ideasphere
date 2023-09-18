@@ -137,10 +137,10 @@ export const Button: React.FC<ButtonProps> = ({
   children,
   text,
   textClassName,
-  color,
-  type,
-  size,
-  roundness,
+  color = "primary",
+  type = "solid",
+  size = "md",
+  roundness = "md",
   loaderColor,
   ...props
 }) => {
@@ -161,7 +161,7 @@ export const Button: React.FC<ButtonProps> = ({
         <View className={loader()}>
           <ActivityIndicator
             color={loaderColor ? loaderColor : getLoaderColor({ color, type })}
-            size={size === "sm" ? "small" : "large"}
+            size={size === "sm" || size === "md" ? "small" : "large"}
           />
         </View>
       )}

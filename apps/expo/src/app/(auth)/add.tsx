@@ -5,12 +5,13 @@ import * as ImagePicker from "expo-image-picker"
 import { PermissionStatus } from "expo-image-picker"
 import type { ImagePickerAsset } from "expo-image-picker"
 import { FlashList } from "@shopify/flash-list"
+import { decode } from "base64-arraybuffer"
+
+import { SUPABASE_IMAGES_BUCKET } from "@ideasphere/consts"
 
 import { Button, Input } from "~/components"
 import { api } from "~/utils/api"
 import { supabase } from "~/utils/auth"
-
-const SUPABASE_IMAGES_BUCKET = "idea_photos" as const
 
 const Add: React.FC = () => {
   const [title, setTitle] = useState("")
@@ -69,14 +70,11 @@ const Add: React.FC = () => {
 
       const promises = images.map((image) => {
         const fileType = "image/png"
-
-        const base64 = image.base64!
-        const imageBlob = new Blob([base64], { type: fileType })
-
         const fileName = (image.assetId ?? image.fileName ?? new Date().getTime())
           .toString()
           .replaceAll(/[:/\\]/g, "-")
-        const file = new File([imageBlob], fileName, { type: fileType })
+
+        const file = decode(image.base64!)
 
         return supabase.storage.from(SUPABASE_IMAGES_BUCKET).upload(`${id}/${fileName}`, file, {
           contentType: fileType,

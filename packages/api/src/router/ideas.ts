@@ -93,9 +93,16 @@ export const ideasRouter = createTRPCRouter({
             },
           ],
         },
-        orderBy: {
-          createdAt: "desc",
-        },
+        orderBy: [
+          {
+            favoritedBy: {
+              _count: "desc",
+            },
+          },
+          {
+            createdAt: "desc",
+          },
+        ],
         select: {
           id: true,
           title: true,

@@ -65,7 +65,7 @@
     "@ideasphere/tailwind-config": "^0.1.0",
     "@ideasphere/tsconfig": "^0.1.0",
     "@types/babel__core": "^7.20.2",
-    "@types/lodash": "^4.14.198",
+    "@types/lodash": "^4.14.199",
     "@types/react": "^18.2.21",
     "eslint": "^8.49.0",
     "prettier": "^3.0.3",

@@ -15,7 +15,7 @@
   "dependencies": {
     "@ideasphere/api": "^0.1.0",
     "@ideasphere/db": "^0.1.0",
-    "@supabase/auth-helpers-nextjs": "^0.7.4",
+    "@supabase/auth-helpers-nextjs": "^0.8.1",
     "@supabase/auth-helpers-react": "^0.4.2",
     "@supabase/supabase-js": "^2.36.0",
     "@t3-oss/env-nextjs": "^0.6.1",

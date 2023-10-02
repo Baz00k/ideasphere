@@ -11,6 +11,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@ideasphere/consts": "^0.1.0",
     "@ideasphere/db": "^0.1.0",
     "@trpc/client": "^10.38.5",
     "@trpc/server": "^10.38.5",

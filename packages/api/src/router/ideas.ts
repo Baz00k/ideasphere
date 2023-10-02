@@ -1,4 +1,7 @@
+import { TRPCError } from "@trpc/server"
 import { z } from "zod"
+
+import { SUPABASE_IMAGES_BUCKET } from "@ideasphere/consts"
 
 import { createTRPCRouter, protectedProcedure } from "../trpc"
 
@@ -180,6 +183,33 @@ export const ideasRouter = createTRPCRouter({
           description: input.description,
           published: input.published ?? false,
           images: input.images,
+        },
+      })
+    }),
+
+  delete: protectedProcedure
+    .input(z.object({ id: z.string() }))
+    .mutation(async ({ ctx, input }) => {
+      const idea = await ctx.db.idea.findUnique({
+        where: {
+          id: input.id,
+        },
+        select: {
+          images: true,
+        },
+      })
+
+      if (!idea) throw new TRPCError({ code: "NOT_FOUND", message: "Idea not found" })
+
+      const { error } = await ctx.supabaseAdmin.storage
+        .from(SUPABASE_IMAGES_BUCKET)
+        .remove(idea.images)
+
+      if (error) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: error.message })
+
+      return ctx.db.idea.delete({
+        where: {
+          id: input.id,
         },
       })
     }),

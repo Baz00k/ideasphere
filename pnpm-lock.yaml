@@ -292,6 +292,9 @@ importers:
 
   packages/api:
     dependencies:
+      '@ideasphere/consts':
+        specifier: ^0.1.0
+        version: link:../consts
       '@ideasphere/db':
         specifier: ^0.1.0
         version: link:../db

@@ -58,7 +58,7 @@ export default function Layout() {
           }}
         />
         <Tabs.Screen
-          name="profile"
+          name="(profile)/profile"
           options={{
             tabBarIcon: ({ size, focused }) => (
               <TabBarIcon name="person" size={size} focused={focused} />

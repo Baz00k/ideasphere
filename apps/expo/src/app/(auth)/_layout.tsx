@@ -1,4 +1,5 @@
 import { Image } from "react-native"
+import { Link } from "expo-router"
 import { Tabs } from "expo-router/tabs"
 import { StatusBar } from "expo-status-bar"
 import { MaterialIcons } from "@expo/vector-icons"
@@ -63,6 +64,15 @@ export default function Layout() {
             tabBarIcon: ({ size, focused }) => (
               <TabBarIcon name="person" size={size} focused={focused} />
             ),
+            headerRight: () => <SettingsIcon />,
+            headerTitle: "",
+            headerShadowVisible: false,
+          }}
+        />
+        <Tabs.Screen
+          name="(profile)/settings"
+          options={{
+            href: null,
             headerShown: false,
           }}
         />
@@ -95,4 +105,10 @@ const TabBarIcon: React.FC<TabBarIconProps> = ({ name, focused, size }) => {
 
 const LogoImage: React.FC = () => (
   <Image source={Logo} className="ml-0 mr-auto h-[50px] w-[150px]" resizeMode="contain" />
+)
+
+const SettingsIcon: React.FC = () => (
+  <Link href="/(profile)/settings" className="mr-4">
+    <MaterialIcons name="settings" size={30} color={colors.primary} />
+  </Link>
 )

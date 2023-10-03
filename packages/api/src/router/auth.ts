@@ -13,6 +13,21 @@ export const authRouter = createTRPCRouter({
       where: {
         userId: ctx.user.id,
       },
+      include: {
+        favoritedIdeas: {
+          select: {
+            id: true,
+          },
+        },
+        ideas: {
+          where: {
+            authorId: ctx.user.id,
+          },
+          select: {
+            id: true,
+          },
+        },
+      },
     })
   }),
 

@@ -30,5 +30,9 @@ export const AssetsLoader: React.FC<AssetsLoaderProps> = ({ children }) => {
     }
   }, [navigationReady, fontsLoaded])
 
+  // Don't render any UI until all assets have been loaded
+  if (!fontsLoaded) return null
+
+  // Navigation will be ready only after mounting the app, so we have to render something, even if splash screen is still visible
   return <>{children}</>
 }

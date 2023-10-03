@@ -1,5 +1,4 @@
 import { Text, View } from "react-native"
-import { SafeAreaView } from "react-native-safe-area-context"
 
 import { LoadingSpinner } from "~/components"
 import { api } from "~/utils/api"
@@ -8,17 +7,17 @@ const Profile: React.FC = () => {
   const { data, isLoading } = api.auth.getProfile.useQuery()
 
   return (
-    <SafeAreaView className="flex h-full w-full bg-white p-4">
+    <>
       {isLoading && (
-        <View className="fixed z-10 flex h-screen w-screen items-center justify-center bg-white">
+        <View className="fixed z-10 flex h-full w-full items-center justify-center bg-white">
           <LoadingSpinner />
         </View>
       )}
-      <View className="flex grow flex-col">
-        <View className="mb-8 flex w-full flex-col items-center gap-y-4">
+      <View className="flex grow flex-col bg-white px-4">
+        <View className="flex w-full flex-col items-center gap-y-4">
           <View className="flex w-full items-center">
             <View className="flex aspect-square w-24 items-center justify-center rounded-full bg-primary">
-              <Text className="mt-3 align-middle font-comfortaa_700 text-5xl text-secondary">
+              <Text className="mt-3 p-1 align-middle font-comfortaa_700 text-5xl text-secondary">
                 {data?.username[0] ?? ""}
               </Text>
             </View>
@@ -41,9 +40,10 @@ const Profile: React.FC = () => {
               <Text className="text-center text-gray-400">Ulubionych</Text>
             </View>
           </View>
+          <View className="mb-4 h-px w-full bg-gray-200" />
         </View>
       </View>
-    </SafeAreaView>
+    </>
   )
 }
 

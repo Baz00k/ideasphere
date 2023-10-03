@@ -51,7 +51,7 @@ const SignUp: React.FC = () => {
   return (
     <>
       <ScrollView
-        className="flex w-full flex-col px-4"
+        className="flex w-full flex-col"
         contentContainerStyle={{ justifyContent: "center", flexGrow: 1 }}
       >
         <View className="mt-auto w-full">

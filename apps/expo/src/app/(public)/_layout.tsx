@@ -34,8 +34,8 @@ const LogInLayout = () => {
                 style={{
                   width: 200,
                   height: 55,
-                  resizeMode: "contain",
                 }}
+                contentFit="contain"
               />
               {!cardShown && (
                 <Animated.View

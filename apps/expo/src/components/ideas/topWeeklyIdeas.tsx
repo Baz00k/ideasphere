@@ -154,7 +154,7 @@ const ErrorView: React.FC = () => {
 const EmptyView: React.FC = () => {
   return (
     <View>
-      <Text className="text-center text-2xl">Brak pomysłów na ten tydzień 😢</Text>
+      <Text className="text-center text-lg">Brak pomysłów na ten tydzień 😢</Text>
     </View>
   )
 }

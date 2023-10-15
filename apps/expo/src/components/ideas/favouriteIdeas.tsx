@@ -37,7 +37,7 @@ const FavouriteIdeas: React.FC = () => {
                 className="mx-auto my-2 flex h-24 w-11/12 items-center justify-center overflow-hidden rounded-xl bg-secondary p-4"
                 activeOpacity={0.8}
               >
-                <Text className="font-comfortaa_400" numberOfLines={3}>
+                <Text className="text-center font-comfortaa_400" numberOfLines={3}>
                   {item.title}
                 </Text>
               </TouchableOpacity>

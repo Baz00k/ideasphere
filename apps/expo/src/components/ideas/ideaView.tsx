@@ -13,7 +13,7 @@ interface IdeaViewProps {
 
 const IdeaView: React.FC<IdeaViewProps> = ({ idea }) => {
   return (
-    <View className="flex flex-col gap-y-4">
+    <View className="flex flex-col gap-y-4 pb-24">
       <View>
         <View className="flex w-full flex-row flex-wrap justify-between gap-2 px-4 pt-4">
           <Text className="font-comfortaa_400 text-3xl text-primary">{idea.title}</Text>

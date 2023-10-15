@@ -56,8 +56,8 @@ export const ideasRouter = createTRPCRouter({
     }))
   }),
 
-  byId: protectedProcedure.input(z.object({ id: z.string() })).query(({ ctx, input }) => {
-    return ctx.db.idea.findUnique({
+  byId: protectedProcedure.input(z.object({ id: z.string() })).query(async ({ ctx, input }) => {
+    const idea = await ctx.db.idea.findUnique({
       where: {
         id: input.id,
       },
@@ -67,8 +67,27 @@ export const ideasRouter = createTRPCRouter({
             favoritedBy: true,
           },
         },
+        favoritedBy: {
+          where: {
+            userId: ctx.user.id,
+          },
+          select: {
+            _count: {
+              select: {
+                favoritedIdeas: true,
+              },
+            },
+          },
+        },
       },
     })
+
+    if (!idea) throw new TRPCError({ code: "NOT_FOUND", message: "Idea not found" })
+
+    return {
+      ...idea,
+      favoritedByMe: idea.favoritedBy.length > 0,
+    }
   }),
 
   search: protectedProcedure

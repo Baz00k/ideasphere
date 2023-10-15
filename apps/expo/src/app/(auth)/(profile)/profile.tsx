@@ -13,7 +13,7 @@ const Profile: React.FC = () => {
           <LoadingSpinner />
         </View>
       )}
-      <View className="flex grow flex-col bg-white px-4">
+      <View className="flex grow flex-col bg-white">
         <View className="flex w-full flex-col items-center gap-y-4">
           <View className="flex w-full items-center">
             <View className="flex aspect-square w-24 items-center justify-center rounded-full bg-primary">

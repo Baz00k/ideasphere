@@ -1,10 +1,12 @@
 import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from "react"
 import { LayoutAnimation, Text, View } from "react-native"
+import { Link } from "expo-router"
 import { FlashList } from "@shopify/flash-list"
 import type { inferRouterOutputs } from "@trpc/server"
 
 import type { AppRouter } from "@ideasphere/api"
 
+import { Button } from "~/components/base/button"
 import { LoadingSpinner } from "~/components/base/loadingSpinner"
 import { IdeaListItem } from "~/components/ideas/ideaListItem"
 import { api } from "~/utils/api"
@@ -155,6 +157,9 @@ const EmptyView: React.FC = () => {
   return (
     <View>
       <Text className="text-center text-lg">Brak pomysłów na ten tydzień 😢</Text>
+      <Link href="/add" className="mx-auto mt-4" asChild>
+        <Button text="Dodaj pomysł" />
+      </Link>
     </View>
   )
 }

@@ -98,14 +98,14 @@ const Add: React.FC = () => {
       })
 
       setImages([])
+      setTitle("")
+      setDescription("")
+      alert("Atrakcja została dodana")
     } catch (error) {
       console.error(error)
       alert("Wystąpił błąd podczas dodawania atrakcji")
     } finally {
-      setTitle("")
-      setDescription("")
       setIsLoading(false)
-      alert("Atrakcja została dodana")
     }
   }
 

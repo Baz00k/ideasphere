@@ -42,8 +42,8 @@ importers:
         specifier: ^0.1.0
         version: link:../../packages/consts
       '@shopify/flash-list':
-        specifier: 1.6.1
-        version: 1.6.1(@babel/runtime@7.23.2)(react-native@0.72.6)(react@18.2.0)
+        specifier: 1.6.2
+        version: 1.6.2(@babel/runtime@7.23.2)(react-native@0.72.6)(react@18.2.0)
       '@supabase/auth-helpers-react':
         specifier: ^0.4.2
         version: 0.4.2(@supabase/supabase-js@2.38.1)
@@ -3161,8 +3161,8 @@ packages:
       join-component: 1.1.0
     dev: false
 
-  /@shopify/flash-list@1.6.1(@babel/runtime@7.23.2)(react-native@0.72.6)(react@18.2.0):
-    resolution: {integrity: sha512-SlBlpP7+zol6D1SKaf402aS30Qgwdjwb8/Qn2CupYwXnTcu2l8TiXB766vcsIvKTqUO7ELfQnCwCq8NXx55FsQ==}
+  /@shopify/flash-list@1.6.2(@babel/runtime@7.23.2)(react-native@0.72.6)(react@18.2.0):
+    resolution: {integrity: sha512-8wcri0z/6Skv9y0bDOOVERMEoi+51saNSAMMRXmImJKgWb/jSI1FJeUSlzrw+RLUlgKndwcwVlqFvPuX5xpq8g==}
     peerDependencies:
       '@babel/runtime': '*'
       react: '*'

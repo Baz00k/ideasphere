@@ -263,7 +263,36 @@ export const ideasRouter = createTRPCRouter({
     })
   }),
 
-  myFavouriteIdeas: protectedProcedure.query(async ({ ctx }) => {
+  getProfileIdeas: protectedProcedure
+    .input(
+      z.object({
+        cursor: z.string().optional(),
+        limit: z.number().min(1).max(100).default(10),
+        published: z.boolean().optional(),
+      }),
+    )
+    .query(async ({ ctx, input }) => {
+      const ideas = await ctx.db.idea.findMany({
+        where: {
+          authorId: ctx.user.id,
+          published: input.published ?? undefined,
+        },
+        orderBy: {
+          createdAt: "desc",
+        },
+        cursor: input.cursor ? { id: input.cursor } : undefined,
+        take: input.limit + 1,
+      })
+
+      const hasNextPage = ideas.length > input.limit
+
+      return {
+        ideas: ideas.slice(0, input.limit),
+        nextPageCursor: hasNextPage ? ideas[ideas.length - 1]?.id : null,
+      }
+    }),
+
+  getProfileFavouriteIdeas: protectedProcedure.query(async ({ ctx }) => {
     const ideas = await ctx.db.idea.findMany({
       where: {
         favoritedBy: {

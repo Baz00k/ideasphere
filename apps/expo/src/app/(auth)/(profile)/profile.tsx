@@ -1,10 +1,19 @@
-import { Text, View } from "react-native"
+import { useState } from "react"
+import { Dimensions, Text, View } from "react-native"
+import { SceneMap, TabBar, TabView } from "react-native-tab-view"
+import tailwindColors from "tailwindcss/colors"
 
-import { LoadingSpinner } from "~/components"
+import { colors } from "@ideasphere/tailwind-config/themeColors"
+
+import { LoadingSpinner, ProfileIdeas } from "~/components"
 import { api } from "~/utils/api"
+
+const initialLayout = { width: Dimensions.get("window").width }
 
 const Profile: React.FC = () => {
   const { data, isLoading } = api.auth.getProfile.useQuery()
+
+  const [index, setIndex] = useState(0)
 
   return (
     <>
@@ -40,11 +49,40 @@ const Profile: React.FC = () => {
               <Text className="text-center text-gray-400">Ulubionych</Text>
             </View>
           </View>
-          <View className="mb-4 h-px w-full bg-gray-200" />
+          <View className=" h-px w-full bg-gray-200" />
         </View>
+        <TabView
+          navigationState={{ index, routes }}
+          renderScene={renderScene}
+          onIndexChange={setIndex}
+          initialLayout={initialLayout}
+          renderTabBar={(props) => (
+            <TabBar
+              {...props}
+              style={{
+                backgroundColor: "white",
+              }}
+              activeColor={colors.primary}
+              inactiveColor={tailwindColors.gray[500]}
+              indicatorStyle={{
+                backgroundColor: colors.primary,
+              }}
+            />
+          )}
+        />
       </View>
     </>
   )
 }
+
+const renderScene = SceneMap<Record<"public" | "private", React.FC>>({
+  public: () => <ProfileIdeas mode="public" />,
+  private: () => <ProfileIdeas mode="private" />,
+})
+
+const routes: { key: "public" | "private"; title: string }[] = [
+  { key: "public", title: "Publiczne" },
+  { key: "private", title: "Prywatne" },
+]
 
 export default Profile

@@ -57,8 +57,8 @@
     "tailwind-variants": "^0.1.18"
   },
   "devDependencies": {
-    "@babel/core": "^7.23.2",
-    "@babel/preset-env": "^7.23.2",
+    "@babel/core": "^7.23.3",
+    "@babel/preset-env": "^7.23.3",
     "@babel/runtime": "^7.23.2",
     "@expo/config-plugins": "^7.2.5",
     "@ideasphere/api": "^0.1.0",

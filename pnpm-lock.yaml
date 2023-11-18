@@ -178,8 +178,8 @@ importers:
         specifier: ^7.20.4
         version: 7.20.4
       '@types/lodash':
-        specifier: ^4.14.200
-        version: 4.14.200
+        specifier: ^4.14.201
+        version: 4.14.201
       '@types/react':
         specifier: ^18.2.33
         version: 18.2.33
@@ -3857,8 +3857,8 @@ packages:
       '@types/node': 18.18.7
     dev: false
 
-  /@types/lodash@4.14.200:
-    resolution: {integrity: sha512-YI/M/4HRImtNf3pJgbF+W6FrXovqj+T+/HpENLTooK9PnkacBsDpeP3IpHab40CClUfhNmdM2WTNP2sa2dni5Q==}
+  /@types/lodash@4.14.201:
+    resolution: {integrity: sha512-y9euML0cim1JrykNxADLfaG0FgD1g/yTHwUs/Jg9ZIU7WKj2/4IW9Lbb1WZbvck78W/lfGXFfe+u2EGfIJXdLQ==}
     dev: true
 
   /@types/minimatch@5.1.2:

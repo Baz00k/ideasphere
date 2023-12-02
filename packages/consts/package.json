@@ -16,7 +16,7 @@
     "@ideasphere/eslint-config": "0.2.0",
     "@ideasphere/prettier-config": "^0.2.0",
     "@ideasphere/tsconfig": "^0.1.0",
-    "eslint": "^8.54.0",
+    "eslint": "^8.55.0",
     "typescript": "^5.3.2"
   },
   "eslintConfig": {

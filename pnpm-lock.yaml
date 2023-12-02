@@ -120,8 +120,8 @@ importers:
         specifier: ~2.14.0
         version: 2.14.0(react-native@0.72.7)(react@18.2.0)
       react-native-pager-view:
-        specifier: 6.2.2
-        version: 6.2.2(react-native@0.72.7)(react@18.2.0)
+        specifier: 6.2.3
+        version: 6.2.3(react-native@0.72.7)(react@18.2.0)
       react-native-reanimated:
         specifier: ~3.3.0
         version: 3.3.0(@babel/core@7.23.5)(@babel/plugin-proposal-nullish-coalescing-operator@7.18.6)(@babel/plugin-proposal-optional-chaining@7.21.0)(@babel/plugin-transform-arrow-functions@7.23.3)(@babel/plugin-transform-shorthand-properties@7.23.3)(@babel/plugin-transform-template-literals@7.23.3)(react-native@0.72.7)(react@18.2.0)
@@ -133,7 +133,7 @@ importers:
         version: 3.27.0(react-native@0.72.7)(react@18.2.0)
       react-native-tab-view:
         specifier: ^3.5.2
-        version: 3.5.2(react-native-pager-view@6.2.2)(react-native@0.72.7)(react@18.2.0)
+        version: 3.5.2(react-native-pager-view@6.2.3)(react-native@0.72.7)(react@18.2.0)
       react-native-url-polyfill:
         specifier: ^2.0.0
         version: 2.0.0(react-native@0.72.7)
@@ -9568,8 +9568,8 @@ packages:
       react-native: 0.72.7(@babel/core@7.23.5)(@babel/preset-env@7.23.5)(react@18.2.0)
     dev: false
 
-  /react-native-pager-view@6.2.2(react-native@0.72.7)(react@18.2.0):
-    resolution: {integrity: sha512-MLkJB7iP6v0Hd4/B4/R/gLCSE+YBtjxG/vHZYBDU+fI3U7HBYgKAg4o6ad8HxbKVcWWyRDNeeVRGISw1MUjlHw==}
+  /react-native-pager-view@6.2.3(react-native@0.72.7)(react@18.2.0):
+    resolution: {integrity: sha512-dqVpXWFtPNfD3D2QQQr8BP+ullS5MhjRJuF8Z/qml4QTILcrWaW8F5iAxKkQR3Jl0ikcEryG/+SQlNcwlo0Ggg==}
     peerDependencies:
       react: '*'
       react-native: '*'
@@ -9626,7 +9626,7 @@ packages:
       warn-once: 0.1.1
     dev: false
 
-  /react-native-tab-view@3.5.2(react-native-pager-view@6.2.2)(react-native@0.72.7)(react@18.2.0):
+  /react-native-tab-view@3.5.2(react-native-pager-view@6.2.3)(react-native@0.72.7)(react@18.2.0):
     resolution: {integrity: sha512-nE5WqjbeEPsWQx4mtz81QGVvgHRhujTNIIZiMCx3Bj6CBFDafbk7XZp9ocmtzXUQaZ4bhtVS43R4FIiR4LboJw==}
     peerDependencies:
       react: '*'
@@ -9635,7 +9635,7 @@ packages:
     dependencies:
       react: 18.2.0
       react-native: 0.72.7(@babel/core@7.23.5)(@babel/preset-env@7.23.5)(react@18.2.0)
-      react-native-pager-view: 6.2.2(react-native@0.72.7)(react@18.2.0)
+      react-native-pager-view: 6.2.3(react-native@0.72.7)(react@18.2.0)
       use-latest-callback: 0.1.6(react@18.2.0)
     dev: false
 

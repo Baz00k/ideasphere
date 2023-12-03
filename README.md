@@ -2,25 +2,8 @@
 
 No idea what to do with your free time? Try IdeaSphere!
 
+Ideasphere is a web and mobile application that allows users to share their ideas of how to spend their free time and find new ones.
+
 ## Quick Start
 
-To get it running, follow the steps below:
-
-### Setup dependencies
-
-```bash
-# Install dependencies
-pnpm i
-
-# Configure environment variables.
-# There is an `.env.example` in the root directory you can use for reference
-cp .env.example .env
-
-# Generate prisma client
-pnpm db:generate
-# Or push your schema to the database
-pnpm db:push
-
-# Run locally
-pnpm dev
-```
+Quick start instructions are available in the [docs/QuickStart.md](docs/QuickStart.md) file.

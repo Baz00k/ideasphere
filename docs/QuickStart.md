@@ -7,6 +7,7 @@ A guide to get you up and running with IdeaSphere.
 - [Node.js](https://nodejs.org/) (version can be found in `.nvmrc`)
 - [pnpm](https://pnpm.io/) (version can be found in `package.json`)
 - A project on [Supabase](https://supabase.io/)
+- A phone with [Expo Go](https://expo.io/client) installed or a simulator (Xcode or Android Studio)
 
 ## Config
 

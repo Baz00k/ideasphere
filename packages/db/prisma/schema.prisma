@@ -242,6 +242,7 @@ model sessions {
     factor_id      String?          @db.Uuid
     ip             String?          @db.Inet
     user_agent     String?          @db.Text
+    tag            String?          @db.VarChar(255)
     aal            aal_level?
     not_after      DateTime?        @db.Timestamptz(6)
     mfa_amr_claims mfa_amr_claims[]

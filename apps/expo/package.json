@@ -52,7 +52,7 @@
     "react-native-screens": "~3.29.0",
     "react-native-tab-view": "^3.5.2",
     "react-native-url-polyfill": "^2.0.0",
-    "superjson": "1.13.3",
+    "superjson": "2.2.1",
     "tailwind-merge": "^1.14.0",
     "tailwind-variants": "^0.1.19"
   },

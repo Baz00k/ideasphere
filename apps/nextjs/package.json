@@ -27,7 +27,7 @@
     "@trpc/react-query": "^10.45.0",
     "@trpc/server": "^10.45.0",
     "encoding": "^0.1.13",
-    "lucide-react": "^0.303.0",
+    "lucide-react": "^0.307.0",
     "next": "^14.0.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",

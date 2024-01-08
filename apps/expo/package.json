@@ -58,8 +58,8 @@
   },
   "devDependencies": {
     "@babel/core": "^7.23.7",
-    "@babel/preset-env": "^7.23.7",
-    "@babel/runtime": "^7.23.7",
+    "@babel/preset-env": "^7.23.8",
+    "@babel/runtime": "^7.23.8",
     "@expo/config-plugins": "^7.2.5",
     "@ideasphere/api": "^0.1.0",
     "@ideasphere/eslint-config": "^0.2.0",

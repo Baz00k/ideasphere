@@ -141,8 +141,8 @@ importers:
         specifier: 2.2.1
         version: 2.2.1
       tailwind-merge:
-        specifier: ^2.2.0
-        version: 2.2.0
+        specifier: ^2.2.1
+        version: 2.2.1
       tailwind-variants:
         specifier: ^0.1.20
         version: 0.1.20(tailwindcss@3.4.1)
@@ -8446,8 +8446,8 @@ packages:
     resolution: {integrity: sha512-Hh0ncPsHPVf6wXQSqJqB3K9Zbudht4aUtNpNXYXSxH+pteWqGAXnjtPsRAnCsCWl38wL0jYF0rJDdMajUI3BDw==}
     engines: {node: '>=16'}
     dependencies:
-      '@babel/traverse': 7.23.7
-      '@babel/types': 7.23.6
+      '@babel/traverse': 7.23.9
+      '@babel/types': 7.23.9
       invariant: 2.2.4
       metro-symbolicate: 0.76.8
       nullthrows: 1.1.1
@@ -8510,8 +8510,8 @@ packages:
     dependencies:
       '@babel/core': 7.23.9
       '@babel/generator': 7.23.6
-      '@babel/template': 7.22.15
-      '@babel/traverse': 7.23.7
+      '@babel/template': 7.23.9
+      '@babel/traverse': 7.23.9
       nullthrows: 1.1.1
     transitivePeerDependencies:
       - supports-color
@@ -8536,8 +8536,8 @@ packages:
     dependencies:
       '@babel/core': 7.23.9
       '@babel/generator': 7.23.6
-      '@babel/parser': 7.23.6
-      '@babel/types': 7.23.6
+      '@babel/parser': 7.23.9
+      '@babel/types': 7.23.9
       babel-preset-fbjs: 3.4.0(@babel/core@7.23.9)
       metro: 0.76.8
       metro-babel-transformer: 0.76.8
@@ -8583,10 +8583,10 @@ packages:
       '@babel/code-frame': 7.23.5
       '@babel/core': 7.23.9
       '@babel/generator': 7.23.6
-      '@babel/parser': 7.23.6
-      '@babel/template': 7.22.15
-      '@babel/traverse': 7.23.7
-      '@babel/types': 7.23.6
+      '@babel/parser': 7.23.9
+      '@babel/template': 7.23.9
+      '@babel/traverse': 7.23.9
+      '@babel/types': 7.23.9
       accepts: 1.3.8
       async: 3.2.4
       chalk: 4.1.2
@@ -11059,8 +11059,8 @@ packages:
     resolution: {integrity: sha512-3mFKyCo/MBcgyOTlrY8T7odzZFx+w+qKSMAmdFzRvqBfLlSigU6TZnlFHK0lkMwj9Bj8OYU+9yW9lmGuS0QEnQ==}
     dev: false
 
-  /tailwind-merge@2.2.0:
-    resolution: {integrity: sha512-SqqhhaL0T06SW59+JVNfAqKdqLs0497esifRrZ7jOaefP3o64fdFNDMrAQWZFMxTLJPiHVjRLUywT8uFz1xNWQ==}
+  /tailwind-merge@2.2.1:
+    resolution: {integrity: sha512-o+2GTLkthfa5YUt4JxPfzMIpQzZ3adD1vLVkvKE1Twl9UAhGsEbIZhHHZVRttyW177S8PDJI3bTQNaebyofK3Q==}
     dependencies:
       '@babel/runtime': 7.23.9
     dev: false

@@ -181,8 +181,8 @@ importers:
         specifier: ^4.14.202
         version: 4.14.202
       '@types/react':
-        specifier: ^18.2.56
-        version: 18.2.56
+        specifier: ^18.2.58
+        version: 18.2.58
       eslint:
         specifier: ^8.56.0
         version: 8.56.0
@@ -275,8 +275,8 @@ importers:
         specifier: ^20.11.19
         version: 20.11.19
       '@types/react':
-        specifier: ^18.2.56
-        version: 18.2.56
+        specifier: ^18.2.58
+        version: 18.2.58
       '@types/react-dom':
         specifier: ^18.2.19
         version: 18.2.19
@@ -4139,11 +4139,11 @@ packages:
   /@types/react-dom@18.2.19:
     resolution: {integrity: sha512-aZvQL6uUbIJpjZk4U8JZGbau9KDeAwMfmhyWorxgBkqDIEf6ROjRozcmPIicqsUwPUjbkDfHKgGee1Lq65APcA==}
     dependencies:
-      '@types/react': 18.2.56
+      '@types/react': 18.2.58
     dev: true
 
-  /@types/react@18.2.56:
-    resolution: {integrity: sha512-NpwHDMkS/EFZF2dONFQHgkPRwhvgq/OAvIaGQzxGSBmaeR++kTg6njr15Vatz0/2VcCEwJQFi6Jf4Q0qBu0rLA==}
+  /@types/react@18.2.58:
+    resolution: {integrity: sha512-TaGvMNhxvG2Q0K0aYxiKfNDS5m5ZsoIBBbtfUorxdH4NGSXIlYvZxLJI+9Dd3KjeB3780bciLyAb7ylO8pLhPw==}
     dependencies:
       '@types/prop-types': 15.7.5
       '@types/scheduler': 0.16.3

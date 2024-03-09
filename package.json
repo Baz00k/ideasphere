@@ -22,9 +22,9 @@
   "dependencies": {
     "@ideasphere/prettier-config": "^0.2.0",
     "@manypkg/cli": "^0.21.2",
-    "@turbo/gen": "^1.12.4",
+    "@turbo/gen": "^1.12.5",
     "prettier": "^3.2.5",
-    "turbo": "^1.12.4",
+    "turbo": "^1.12.5",
     "typescript": "^5.3.3"
   },
   "prettier": "@ideasphere/prettier-config"

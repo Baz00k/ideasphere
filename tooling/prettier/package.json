@@ -15,7 +15,7 @@
   },
   "devDependencies": {
     "@ideasphere/tsconfig": "^0.1.0",
-    "typescript": "^5.4.4"
+    "typescript": "^5.4.5"
   },
   "prettier": "@ideasphere/prettier-config"
 }

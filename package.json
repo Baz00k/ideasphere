@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@ideasphere/prettier-config": "^0.2.0",
-    "@manypkg/cli": "^0.21.3",
+    "@manypkg/cli": "^0.21.4",
     "@turbo/gen": "^1.13.2",
     "prettier": "^3.2.5",
     "turbo": "^1.13.2",

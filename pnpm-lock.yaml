@@ -215,7 +215,7 @@ importers:
         version: 2.42.5
       '@t3-oss/env-nextjs':
         specifier: ^0.8.0
-        version: 0.8.0(typescript@5.4.5)(zod@3.22.4)
+        version: 0.8.0(typescript@5.4.5)(zod@3.22.5)
       '@tanstack/react-query':
         specifier: ^4.36.1
         version: 4.36.1(react-dom@18.2.0)(react-native@0.73.7)(react@18.2.0)
@@ -256,8 +256,8 @@ importers:
         specifier: 2.2.1
         version: 2.2.1
       zod:
-        specifier: ^3.22.4
-        version: 3.22.4
+        specifier: ^3.22.5
+        version: 3.22.5
     devDependencies:
       '@ideasphere/eslint-config':
         specifier: ^0.2.0
@@ -314,8 +314,8 @@ importers:
         specifier: 2.2.1
         version: 2.2.1
       zod:
-        specifier: ^3.22.4
-        version: 3.22.4
+        specifier: ^3.22.5
+        version: 3.22.5
     devDependencies:
       '@ideasphere/eslint-config':
         specifier: ^0.2.0
@@ -3858,7 +3858,7 @@ packages:
       defer-to-connect: 2.0.1
     dev: false
 
-  /@t3-oss/env-core@0.8.0(typescript@5.4.5)(zod@3.22.4):
+  /@t3-oss/env-core@0.8.0(typescript@5.4.5)(zod@3.22.5):
     resolution: {integrity: sha512-Tc1pg0KH/tJeI0Z1s/Isp1VsGDj1N03ZAYFV8GjWgMxytF/ve0Dv+opjmTapHICRv8qiB1Y/fsTjkWNMpKPRCQ==}
     peerDependencies:
       typescript: '>=5.0.0'
@@ -3868,10 +3868,10 @@ packages:
         optional: true
     dependencies:
       typescript: 5.4.5
-      zod: 3.22.4
+      zod: 3.22.5
     dev: false
 
-  /@t3-oss/env-nextjs@0.8.0(typescript@5.4.5)(zod@3.22.4):
+  /@t3-oss/env-nextjs@0.8.0(typescript@5.4.5)(zod@3.22.5):
     resolution: {integrity: sha512-bJyoE8of4QmqZN7a49iLJAbUq4graScb9ezXzvnuIVr9JP43C093vmy55hT1uZL533CwiPz8zo1INwyAS6qnHw==}
     peerDependencies:
       typescript: '>=5.0.0'
@@ -3880,9 +3880,9 @@ packages:
       typescript:
         optional: true
     dependencies:
-      '@t3-oss/env-core': 0.8.0(typescript@5.4.5)(zod@3.22.4)
+      '@t3-oss/env-core': 0.8.0(typescript@5.4.5)(zod@3.22.5)
       typescript: 5.4.5
-      zod: 3.22.4
+      zod: 3.22.5
     dev: false
 
   /@tanstack/match-sorter-utils@8.8.4:
@@ -12054,6 +12054,6 @@ packages:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
 
-  /zod@3.22.4:
-    resolution: {integrity: sha512-iC+8Io04lddc+mVqQ9AZ7OQ2MrUKGN+oIQyq1vemgt46jwCwLfhq7/pwnBnNXXXZb8VTVLKwp9EDkx+ryxIWmg==}
+  /zod@3.22.5:
+    resolution: {integrity: sha512-HqnGsCdVZ2xc0qWPLdO25WnseXThh0kEYKIdV5F/hTHO75hNZFp8thxSeHhiPrHZKrFTo1SOgkAj9po5bexZlw==}
     dev: false

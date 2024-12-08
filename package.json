@@ -2,7 +2,7 @@
   "name": "ideasphere",
   "private": true,
   "engines": {
-    "node": ">=20.12.2"
+    "node": ">=20.18.1"
   },
   "packageManager": "pnpm@9.0.6",
   "scripts": {

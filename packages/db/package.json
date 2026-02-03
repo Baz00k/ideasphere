@@ -22,7 +22,7 @@
     "@ideasphere/prettier-config": "^0.2.0",
     "@ideasphere/tsconfig": "^0.1.0",
     "dotenv-cli": "^7.4.1",
-    "eslint": "^8.57.0",
+    "eslint": "^8.57.1",
     "prettier": "^3.2.5",
     "prisma": "^5.13.0",
     "ts-node": "^10.9.2",
